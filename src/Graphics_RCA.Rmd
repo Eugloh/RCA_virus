@@ -1,0 +1,86 @@
+---
+title: "plot RCA"
+author: "Eugénie LOHMANN"
+output: html_document
+runtime: shiny
+---
+
+```{r, include=FALSE}
+rm(list = ls(all = TRUE))
+gc()
+## plot 
+
+baseDir <- "~/Documents/ROSARIO/fichiers/RCA_virus"
+SourceDir <- "~/Documents/ROSARIO/fichiers/RCA_virus/src"
+OutputDir <- "~/Documents/ROSARIO/fichiers/RCA_virus/plot"
+DataDir <- "~/Documents/ROSARIO/fichiers/RCA_virus/data"
+
+#Librairies et autres
+knitr::opts_chunk$set(echo = TRUE)
+
+check_packages <- function(x){
+  for( i in x ){
+    #  require returns TRUE invisibly if it was able to load package
+    if( ! require( i , character.only = TRUE ) ){
+      #  If package was not able to be loaded then re-install
+      install.packages( i , dependencies = TRUE )
+      #  Load package after installing
+      require( i , character.only = TRUE )
+    }
+  }
+}
+
+packages=c("optparse")
+check_packages(packages)
+# options
+option_list = list(
+  make_option(c("-p", "--pattern"), type="character", default="csv", help="pattern for file names [default= %default]", metavar="character")
+); 
+opt_parser = OptionParser(option_list=option_list);
+opt = parse_args(opt_parser);
+
+#Tableaux
+csvFile  <- grep(opt$pattern,list.files(DataDir),value=TRUE) # find names of every data files
+Data<- list()
+for (el in csvFile){
+  el_name <- sapply(strsplit(as.character(el), "\\."), "[[", 1)
+  Data[[el_name]] <- read.delim(paste(DataDir,el, sep = "/"), row.names=1)
+}
+
+#Fonctions necessaires
+
+
+
+```
+
+
+
+```{r, include=TRUE, echo=FALSE,warning=FALSE}
+# Graphique barres empilees, repartition globale
+
+shinyApp(
+  
+  ui = fluidPage(
+    
+        sidebarPanel(),
+        mainPanel()
+    
+    
+  ),
+  
+  server = function(input, output) {
+    #Widget change seuil max = nombre individus du re-echantillonnage
+    output$slider_num <- renderUI()
+    #Graphique creation
+    output$histogramme_c <- renderPlotly()
+    
+  
+    
+  },
+  options = list(height = 950, width = "100%")
+)
+
+```
+
+
+
