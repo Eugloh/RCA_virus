@@ -10,10 +10,17 @@ rm(list = ls(all = TRUE))
 gc()
 ## plot 
 
-baseDir <- "~/Documents/ROSARIO/fichiers/RCA_virus"
-SourceDir <- "~/Documents/ROSARIO/fichiers/RCA_virus/src"
-OutputDir <- "~/Documents/ROSARIO/fichiers/RCA_virus/plot"
-DataDir <- "~/Documents/ROSARIO/fichiers/RCA_virus/data"
+# baseDir <- "~/Documents/ROSARIO/fichiers/RCA_virus"
+# SourceDir <- "~/Documents/ROSARIO/fichiers/RCA_virus/src"
+# OutputDir <- "~/Documents/ROSARIO/fichiers/RCA_virus/plot"
+# DataDir <- "~/Documents/ROSARIO/fichiers/RCA_virus/data"
+
+baseDir <- "/home/lohmanne/Documents/RCA_virus"
+SourceDir <- "/home/lohmanne/Documents/RCA_virus/src"
+OutputDir <- "/home/lohmanne/Documents/RCA_virus/plot"
+DataDir <- "/home/lohmanne/Documents/RCA_virus/data"
+
+
 
 #Librairies et autres
 knitr::opts_chunk$set(echo = TRUE)
@@ -30,7 +37,8 @@ check_packages <- function(x){
   }
 }
 
-packages=c("optparse")
+
+packages=c("optparse","rlist","tidyverse","scales","reshape2","ggplot2","stringr","dplyr","tidyr")
 check_packages(packages)
 # options
 option_list = list(
@@ -48,7 +56,189 @@ for (el in csvFile){
 }
 
 #Fonctions necessaires
+#Fonctions necessaires
+sample_table <- function(name_data, data_column, column_taxonomy, sample_size){
+        total <- sum(data_column)
+        proba <- data_column / total
+        sample_column <- as.data.frame(sample(column_taxonomy, sample_size, prob=proba, replace=T))
+        new_sample <- as.data.frame(table(unlist(sample_column)))
+        colnames(new_sample) <- c("taxonomy",name_data)
+        return(new_sample)
+}
 
+run_sample_table <- function(graphe, sample_number, columns){
+  graphe_sample = {}
+  for(col in columns){
+    data_col <- subset.data.frame(graphe, select=col)
+    new_col <- sample_table(col, data_col[,], graphe$taxonomy, sample_number)
+        if (is.null(graphe_sample)){
+          graphe_sample <- new_col
+        }
+        else{
+          graphe_sample <- full_join(graphe_sample,new_col,by="taxonomy")
+        }
+      }
+  graphe_sample[is.na(graphe_sample)] <- 0
+  return(graphe_sample)
+  }
+  
+  
+
+ncbi_virus_lineages <- read.csv(paste(baseDir,"lineage","ncbi_lineages-virus.csv", sep = "/"))
+
+# j'enleve les colonnes qui ne contiennes que des NA 
+### Colonne contenant que des NA
+lineage <- ncbi_virus_lineages[, apply(ncbi_virus_lineages, 2, function(x) !all(is.na(x)))]
+# write.table(lineage, file=paste(baseDir,"lineage","ncbi_lineages-virus_short.csv", sep = "/"), col.names = TRUE , row.names=FALSE, sep=",")
+
+x <- grep(paste(rownames(Data[["Abundance_reduced_taxid"]]),  collapse="|"),lineage$tax_id) # lineage position en récupérant par TAXID
+table_analyse<-lineage[x,][which(lineage[x,]$tax_id%in%rownames(Data[["Abundance_reduced_taxid"]])),] # lineage en ne gardant que les ligne d'intéret 
+
+
+
+df <- Data[["Abundance_reduced_taxid"]]
+nom_colonnes <- colnames(table_analyse)
+## filtre de la table d'analyse lineage 
+#  [1] "tax_id"       "superkingdom" "phylum"       "class"        "order"       
+#  [6] "family"       "genus"        "species"      "kingdom"      "no.rank"     
+# [11] "no.rank1"     "no.rank2"     "no.rank22"    "no.rank3"     "subclass"    
+# [16] "subfamily"    "subkingdom"   "suborder"     "subphylum"    "subspecies"  
+# [21] "subtribe"     "superfamily" 
+
+for (i in colnames(table_analyse)){
+  table_analyse[i][which(table_analyse[i]==""),] <- NA
+}
+
+
+table_analyse$taxonomy<-NA
+for (el in 1:nrow(table_analyse)){
+  name="Viruses"
+  for (i in c("family","subkingdom","genus","species")){
+
+  name=paste(name,table_analyse[el,i], sep=";")
+  
+  }
+  table_analyse$taxonomy[el]<-name
+}
+
+
+df$tax_id <- rownames(df)
+df<- transform(df, tax_id = as.numeric(tax_id))
+df <-df[order(df$tax_id),]
+table_analyse <- table_analyse[order(table_analyse$tax_id),]
+
+dd<- bind_cols(df, table_analyse)
+
+
+vect<-which(colnames(dd)%in%c("Row.names" ,"tax_id","phylum","superkingdom", "class", "kingdom", "no.rank2", "no.rank22", "no.rank3", "subclass", "subfamily", "suborder" , "subphylum", "subspecies", "subtribe" ,"superfamily" ))
+#"Row.names" ,"tax_id", "phylum", "class", "kingdom", "no.rank2", "no.rank22", "no.rank3", "subclass", "subfamily", "suborder" , "subphylum", subspecies", "subtribe" ,"superfamily" 
+dd<-dd[,-vect]
+colnames(dd)
+
+
+tmpdd <-dd[order(-dd$RCA.Skin.5,-dd$RCA.Skin.7,-dd$RCA.Skin.10,-dd$RCA.Skin.3,-dd$RCA.Skin.8,-dd$RCA.Skin.12,-dd$RCA.Skin.1,-dd$RCA.Skin.4,-dd$RCA.Skin.6,-dd$RCA.Skin.11,-dd$RCA.Skin.2,-dd$RCA.Skin.9),]
+tmpNamedtable <-Data[["Abundance_atleast2seq"]][order(-Data[["Abundance_atleast2seq"]]$RCA.Skin.5 ,-Data[["Abundance_atleast2seq"]]$RCA.Skin.7 ,-Data[["Abundance_atleast2seq"]]$RCA.Skin.10 ,-Data[["Abundance_atleast2seq"]]$RCA.Skin.3 ,-Data[["Abundance_atleast2seq"]]$RCA.Skin.8 ,-Data[["Abundance_atleast2seq"]]$RCA.Skin.12 ,-Data[["Abundance_atleast2seq"]]$RCA.Skin.1 ,-Data[["Abundance_atleast2seq"]]$RCA.Skin.4,-Data[["Abundance_atleast2seq"]]$RCA.Skin.6 ,-Data[["Abundance_atleast2seq"]]$RCA.Skin.11 ,-Data[["Abundance_atleast2seq"]]$RCA.Skin.2 ,-Data[["Abundance_atleast2seq"]]$RCA.Skin.9 ),]
+
+dd1 <- cbind(tmpNamedtable,tmpdd)
+
+# colnames(dd1[c(0:24,52,56:58,67,73)])
+#  [1] "RCA.Skin.5"   "RCA.Vulva.5"  "RCA.Vulva.8"  "RCA.Skin.7"   "RCA.Vulva.3" 
+#  [6] "RCA.Vulva.7"  "RCA.Skin.10"  "RCA.Skin.3"   "RCA.Vulva.4"  "RCA.Skin.8"  
+# [11] "RCA.Vulva.9"  "RCA.Skin.12"  "RCA.Skin.1"   "RCA.Vulva.1"  "RCA.Vulva.6" 
+# [16] "RCA.Skin.4"   "RCA.Skin.6"   "RCA.Vulva.10" "RCA.Vulva.11" "RCA.Vulva.12"
+# [21] "RCA.Skin.11"  "RCA.Skin.2"   "RCA.Vulva.2"  "RCA.Skin.9"   "superkingdom"
+# [26] "family"       "genus"        "species"      "subkingdom"   "taxonomy"    
+
+
+dd2 <- dd1[c(0:24,52:55,58,59)]
+
+dd2$ESPECES <- rownames(dd2)
+
+
+write.csv(dd2,paste(DataDir,"table_compte_more_than2.csv",sep="/"))
+#|||||||||||||||||||||||||||||||||||||||||||||||||-
+
+
+var_Data <- colnames( dd2[grepl("^RCA",colnames(dd2))])
+
+
+restructuredData = melt( dd2, # table with all info
+  id = c("ESPECES","family","subkingdom","genus","species"),
+    measure.vars = var_Data, 
+    variable_name = "number" )
+
+
+
+levels(restructuredData$variable) <- c( "RCA.Skin.1","RCA.Skin.2", "RCA.Skin.3","RCA.Skin.4","RCA.Skin.5", "RCA.Skin.6" ,"RCA.Skin.7", "RCA.Skin.8","RCA.Skin.9",
+"RCA.Skin.10", "RCA.Skin.11","RCA.Skin.12"  , "RCA.Vulva.1" ,"RCA.Vulva.2" ,"RCA.Vulva.3","RCA.Vulva.4","RCA.Vulva.5" , "RCA.Vulva.6" ,"RCA.Vulva.7" , "RCA.Vulva.8" , "RCA.Vulva.9",       
+    "RCA.Vulva.10", "RCA.Vulva.11" ,"RCA.Vulva.12"  )
+
+restructuredData$from_ <- NA
+g <- grepl("Skin", restructuredData$variable)
+restructuredData$from_[which(g)] <- "Skin"
+restructuredData$from_[-which(g)] <- "Vulva"
+
+
+## table without all the 0 values 
+reducedrestructuredData <- restructuredData[!restructuredData$value==0,]
+rownames(reducedrestructuredData) <- 1:nrow(reducedrestructuredData)
+
+
+##################
+Data[["skin"]] <- dd2[grep("Skin|tax_id|order|family|genus|species|ESPECES",colnames(dd2))]
+Data[["vulva"]] <- dd2[grep("Vulva|tax_id|order|family|genus|species|ESPECES",colnames(dd2))]
+
+  
+Data[["skinreduced"]] <- Data[["skin"]][rowSums(Data[["skin"]]==0, na.rm=TRUE)<ncol(Data[["skin"]]), ] # table with no virus == 0 
+Data[["vulvareduced"]] <- Data[["vulva"]][rowSums(Data[["vulva"]]==0, na.rm=TRUE)<ncol(Data[["vulva"]]), ]
+
+Data[["skinreducedsup10"]] <- Data[["skinreduced"]][which(rowSums(Data[["skinreduced"]][,0:12])>10),] # compte > 10
+Data[["vulvareducedsup10"]] <- Data[["vulvareduced"]][which(rowSums(Data[["vulvareduced"]][,0:12])>10),]
+
+write.table(Data[["skinreducedsup10"]],paste(DataDir,"skin_treshold10.csv",sep="/"),row.names = F,col.names = T)
+write.table(Data[["vulvareducedsup10"]],paste(DataDir,"vulva_treshold10.csv",sep="/"),row.names = F,col.names = T)
+write.table(reducedrestructuredData,paste(DataDir,"OUTPUT_to_ExPanD.csv",sep="/"),row.names = F,col.names = T)
+
+#######
+# reproduction rmd
+df <- dd2[c(0:24,30)]
+
+# Tableau de comptage final
+taxonomy_split <- list()
+
+for (line in df$taxonomy){
+  element_combi <- ""
+  elements <- unlist(str_split(line, ";"))
+  elements <- elements[ elements != ""]
+  for (element in elements){
+    if (element_combi == ""){
+      element_combi <- element
+      taxonomy_split <- list.append(taxonomy_split, element_combi)
+    }
+    else{
+      element_combi <- paste(element_combi, element, sep=";")
+      taxonomy_split <- list.append(taxonomy_split, element_combi)
+    }
+  }
+}
+taxonomy_split <- unique(unlist(taxonomy_split))
+
+Table_count <- data.frame(matrix(0L,ncol=25, nrow=length(taxonomy_split)))
+colnames(Table_count) <- c("taxonomy",levels(as.factor(restructuredData$variable)))
+Table_count$taxonomy <- taxonomy_split
+
+
+for (line in Table_count$taxonomy){
+  str_to_search <- str_replace_all(noquote(line), "[(]","[(]")
+  str_to_search <- str_replace_all(str_to_search, "[)]","[)]")
+  df$get <- str_detect(df$taxonomy, str_to_search)
+  line[2:25] <- c(colSums(df[df$get == "TRUE",1:24]))
+  Table_count[Table_count$taxonomy == line[1],] <- line
+  #grace au vecteur found on sait quelle ligne sont a recuperer dans df et a additionner dans Table_count
+  
+}
+
+write.csv(Table_count, paste(DataDir,"matrice_comptage_final.txt",sep="/"))
 
 
 ```
@@ -59,23 +249,59 @@ for (el in csvFile){
 # Graphique barres empilees, repartition globale
 
 shinyApp(
-  
+
   ui = fluidPage(
-    
-        sidebarPanel(),
-        mainPanel()
-    
-    
+  #Widgets 
+    sidebarPanel(
+      h2(strong("Options :")),
+      selectInput("taxon_radio", width = "100%",
+                  h4("Niveau taxonomique:"),
+
+                  choices=list("Species"=0,"Family"=1,"Subkingdom"=2,"genus"=3,selected = 1),
+        checkboxGroupInput("hist_checkbox",
+                         h4("Echantillons desires:"), width = "100%",
+                         names(Table_count[,2:25]), selected = colnames(Table_count[,2:6]), inline=F),
+      numericInput("sample_num", width = "100%",
+                  h4("Taille du re-echantillonnage:"),
+                  min=100, max=20000, value=500),
+      uiOutput("slider_num"),
+      width=3),
+  #Graphe barres empilees
+    mainPanel(plotlyOutput("histogramme_c"),width=9)
   ),
-  
+
   server = function(input, output) {
-    #Widget change seuil max = nombre individus du re-echantillonnage
-    output$slider_num <- renderUI()
-    #Graphique creation
-    output$histogramme_c <- renderPlotly()
-    
-  
-    
+  #Widget change seuil max = nombre individus du re-echantillonnage
+    output$slider_num <- renderUI({sliderInput("hist_num", width = "100%",
+                  h4("Nombre d'individus minimum (seuil):"),
+                  min=1, max=input$sample_num, step=1, value=20)})
+  #Graphique creation
+    output$histogramme_c <- renderPlotly({
+      #recuperer echantillons
+      graphe <- data.frame(subset.data.frame(Table_count, select = input$hist_checkbox))
+      graphe$taxonomy <- Table_count$taxonomy
+      
+      #recuperer Taxon
+      regular <- paste("^([^\\;]*\\;){",input$taxon_radio,"}[^\\;]*$",sep="")
+      graphe_trans <- graphe[str_detect(graphe$taxonomy, regular),] 
+      graphe_t <- graphe_trans[str_detect(graphe_trans$taxonomy, "(unclassified)$",negate=T),]
+      graphe_t$taxonomy <- str_extract(graphe_t$taxonomy,"[^\\;]*$")
+      
+      #creation des nouveaux echantillons
+      graphe_sample <- run_sample_table(graphe_t,input$sample_num,input$hist_checkbox)
+      
+      #Graphique barres empilees
+      data_graphe <- data.frame(species=graphe_sample$taxonomy, melt(graphe_sample, id.vars=c("taxonomy"))) %>% select(-taxonomy)
+  g <- data_graphe %>% filter(value>=input$hist_num) %>% ggplot(aes(x=variable,y=value,fill=as.factor(species))) + 
+       geom_bar(position="fill",stat="identity") +
+       theme_classic()+theme(axis.text.x = element_text(angle=90, hjust=1), plot.title = element_text(color="Black", size=14, 
+                                                                                                      face="bold"),
+             axis.title = element_text(face="bold",hjust = 0.5) , legend.direction="horizontal", legend.position = "bottom",
+             legend.title= element_text(size=13,face="bold") ) +
+       guides(fill=guide_legend(title="Taxons")) +
+       xlab("Echantillons") + ylab("Abondance") + ggtitle("Composition des differents echantillons") 
+      ggplotly(g)%>% layout(height = 850)})
+      
   },
   options = list(height = 950, width = "100%")
 )
