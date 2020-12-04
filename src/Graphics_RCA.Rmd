@@ -10,16 +10,15 @@ rm(list = ls(all = TRUE))
 gc()
 ## plot 
 
-# baseDir <- "~/Documents/ROSARIO/fichiers/RCA_virus"
-# SourceDir <- "~/Documents/ROSARIO/fichiers/RCA_virus/src"
-# OutputDir <- "~/Documents/ROSARIO/fichiers/RCA_virus/plot"
-# DataDir <- "~/Documents/ROSARIO/fichiers/RCA_virus/data"
+baseDir <- "~/Documents/ROSARIO/fichiers/RCA_virus"
+SourceDir <- "~/Documents/ROSARIO/fichiers/RCA_virus/src"
+OutputDir <- "~/Documents/ROSARIO/fichiers/RCA_virus/plot"
+DataDir <- "~/Documents/ROSARIO/fichiers/RCA_virus/data"
 
-baseDir <- "/home/lohmanne/Documents/RCA_virus"
-SourceDir <- "/home/lohmanne/Documents/RCA_virus/src"
-OutputDir <- "/home/lohmanne/Documents/RCA_virus/plot"
-DataDir <- "/home/lohmanne/Documents/RCA_virus/data"
-
+# baseDir <- "/home/lohmanne/Documents/RCA_virus"
+# SourceDir <- "/home/lohmanne/Documents/RCA_virus/src"
+# OutputDir <- "/home/lohmanne/Documents/RCA_virus/plot"
+# DataDir <- "/home/lohmanne/Documents/RCA_virus/data"
 
 
 #Librairies et autres
@@ -38,7 +37,7 @@ check_packages <- function(x){
 }
 
 
-packages=c("optparse","rlist","tidyverse","scales","reshape2","ggplot2","stringr","dplyr","tidyr")
+packages=c("optparse","plotly","rlist","tidyverse","scales","reshape2","ggplot2","stringr","dplyr","tidyr")
 check_packages(packages)
 # options
 option_list = list(
@@ -99,11 +98,9 @@ table_analyse<-lineage[x,][which(lineage[x,]$tax_id%in%rownames(Data[["Abundance
 df <- Data[["Abundance_reduced_taxid"]]
 nom_colonnes <- colnames(table_analyse)
 ## filtre de la table d'analyse lineage 
-#  [1] "tax_id"       "superkingdom" "phylum"       "class"        "order"       
-#  [6] "family"       "genus"        "species"      "kingdom"      "no.rank"     
-# [11] "no.rank1"     "no.rank2"     "no.rank22"    "no.rank3"     "subclass"    
-# [16] "subfamily"    "subkingdom"   "suborder"     "subphylum"    "subspecies"  
-# [21] "subtribe"     "superfamily" 
+#  [1] "tax_id"       "superkingdom" "phylum"       "class"        "order"        "family"       "genus"        "species"     
+#  [9] "kingdom"      "no.rank"      "no.rank1"     "no.rank2"     "no.rank22"    "no.rank3"     "subclass"     "subfamily"   
+# [17] "subkingdom"   "suborder"     "subphylum"    "subspecies"   "subtribe"     "superfamily" 
 
 for (i in colnames(table_analyse)){
   table_analyse[i][which(table_analyse[i]==""),] <- NA
@@ -114,9 +111,7 @@ table_analyse$taxonomy<-NA
 for (el in 1:nrow(table_analyse)){
   name="Viruses"
   for (i in c("family","subkingdom","genus","species")){
-
   name=paste(name,table_analyse[el,i], sep=";")
-  
   }
   table_analyse$taxonomy[el]<-name
 }
@@ -130,8 +125,8 @@ table_analyse <- table_analyse[order(table_analyse$tax_id),]
 dd<- bind_cols(df, table_analyse)
 
 
-vect<-which(colnames(dd)%in%c("Row.names" ,"tax_id","phylum","superkingdom", "class", "kingdom", "no.rank2", "no.rank22", "no.rank3", "subclass", "subfamily", "suborder" , "subphylum", "subspecies", "subtribe" ,"superfamily" ))
-#"Row.names" ,"tax_id", "phylum", "class", "kingdom", "no.rank2", "no.rank22", "no.rank3", "subclass", "subfamily", "suborder" , "subphylum", subspecies", "subtribe" ,"superfamily" 
+vect<-which(colnames(dd)%in%c("Row.names" ,"tax_id","phylum","superkingdom", "class", "kingdom", "no.rank2", "no.rank22", "no.rank3", "subclass", "order","subfamily", "suborder" , "subphylum", "subspecies", "subtribe" ,"superfamily" ))
+#"Row.names" ,"tax_id", "phylum", "order","class", "kingdom", "no.rank2", "no.rank22", "no.rank3", "subclass", "subfamily", "suborder" , "subphylum", subspecies", "subtribe" ,"superfamily" 
 dd<-dd[,-vect]
 colnames(dd)
 
@@ -150,12 +145,12 @@ dd1 <- cbind(tmpNamedtable,tmpdd)
 # [26] "family"       "genus"        "species"      "subkingdom"   "taxonomy"    
 
 
-dd2 <- dd1[c(0:24,52:55,58,59)]
+dd2 <- dd1[c(0:24,52:54,57,58)]
 
 dd2$ESPECES <- rownames(dd2)
 
 
-write.csv(dd2,paste(DataDir,"table_compte_more_than2.csv",sep="/"))
+# write.csv(dd2,paste(DataDir,"table_compte_more_than2.csv",sep="/"))
 #|||||||||||||||||||||||||||||||||||||||||||||||||-
 
 
@@ -169,12 +164,11 @@ restructuredData = melt( dd2, # table with all info
 
 
 
-levels(restructuredData$variable) <- c( "RCA.Skin.1","RCA.Skin.2", "RCA.Skin.3","RCA.Skin.4","RCA.Skin.5", "RCA.Skin.6" ,"RCA.Skin.7", "RCA.Skin.8","RCA.Skin.9",
-"RCA.Skin.10", "RCA.Skin.11","RCA.Skin.12"  , "RCA.Vulva.1" ,"RCA.Vulva.2" ,"RCA.Vulva.3","RCA.Vulva.4","RCA.Vulva.5" , "RCA.Vulva.6" ,"RCA.Vulva.7" , "RCA.Vulva.8" , "RCA.Vulva.9",       
+levels(restructuredData$number) <- c( "RCA.Skin.1","RCA.Skin.2", "RCA.Skin.3","RCA.Skin.4","RCA.Skin.5", "RCA.Skin.6" ,"RCA.Skin.7", "RCA.Skin.8","RCA.Skin.9","RCA.Skin.10", "RCA.Skin.11","RCA.Skin.12"  , "RCA.Vulva.1" ,"RCA.Vulva.2" ,"RCA.Vulva.3","RCA.Vulva.4","RCA.Vulva.5" , "RCA.Vulva.6" ,"RCA.Vulva.7" , "RCA.Vulva.8" , "RCA.Vulva.9",
     "RCA.Vulva.10", "RCA.Vulva.11" ,"RCA.Vulva.12"  )
 
 restructuredData$from_ <- NA
-g <- grepl("Skin", restructuredData$variable)
+g <- grepl("Skin", restructuredData$number)
 restructuredData$from_[which(g)] <- "Skin"
 restructuredData$from_[-which(g)] <- "Vulva"
 
@@ -182,7 +176,6 @@ restructuredData$from_[-which(g)] <- "Vulva"
 ## table without all the 0 values 
 reducedrestructuredData <- restructuredData[!restructuredData$value==0,]
 rownames(reducedrestructuredData) <- 1:nrow(reducedrestructuredData)
-
 
 ##################
 Data[["skin"]] <- dd2[grep("Skin|tax_id|order|family|genus|species|ESPECES",colnames(dd2))]
@@ -195,13 +188,18 @@ Data[["vulvareduced"]] <- Data[["vulva"]][rowSums(Data[["vulva"]]==0, na.rm=TRUE
 Data[["skinreducedsup10"]] <- Data[["skinreduced"]][which(rowSums(Data[["skinreduced"]][,0:12])>10),] # compte > 10
 Data[["vulvareducedsup10"]] <- Data[["vulvareduced"]][which(rowSums(Data[["vulvareduced"]][,0:12])>10),]
 
-write.table(Data[["skinreducedsup10"]],paste(DataDir,"skin_treshold10.csv",sep="/"),row.names = F,col.names = T)
-write.table(Data[["vulvareducedsup10"]],paste(DataDir,"vulva_treshold10.csv",sep="/"),row.names = F,col.names = T)
-write.table(reducedrestructuredData,paste(DataDir,"OUTPUT_to_ExPanD.csv",sep="/"),row.names = F,col.names = T)
+# write.table(Data[["skinreducedsup10"]],paste(DataDir,"skin_treshold10.csv",sep="/"),row.names = F,col.names = T)
+# write.table(Data[["vulvareducedsup10"]],paste(DataDir,"vulva_treshold10.csv",sep="/"),row.names = F,col.names = T)
+# write.table(reducedrestructuredData,paste(DataDir,"OUTPUT_to_ExPanD.csv",sep="/"),row.names = F,col.names = T)
 
 #######
 # reproduction rmd
-df <- dd2[c(0:24,30)]
+df <- dd2[c(0:24,29)]
+
+
+for (i in  1:24){
+  df[,i]<-as.integer(df[,i])
+}
 
 # Tableau de comptage final
 taxonomy_split <- list()
@@ -237,11 +235,13 @@ for (line in Table_count$taxonomy){
   #grace au vecteur found on sait quelle ligne sont a recuperer dans df et a additionner dans Table_count
   
 }
+Table_count$taxonomy<-paste(Table_count$taxonomy,";",sep="")
+# write.csv(Table_count, paste(DataDir,"matrice_comptage_final.txt",sep="/"))
 
-write.csv(Table_count, paste(DataDir,"matrice_comptage_final.txt",sep="/"))
-
+colnames(Table_count)<-c("taxonomy",levels(restructuredData$number))
 
 ```
+
 
 
 
@@ -257,15 +257,15 @@ shinyApp(
       selectInput("taxon_radio", width = "100%",
                   h4("Niveau taxonomique:"),
 
-                  choices=list("Species"=0,"Family"=1,"Subkingdom"=2,"genus"=3,selected = 1),
-        checkboxGroupInput("hist_checkbox",
+                  choices=list("Base"=0,"Family"=1,"Subkingdom"=2,"genus"=3,"type"=4,"species"=5),selected = 3),
+      checkboxGroupInput("hist_checkbox",
                          h4("Echantillons desires:"), width = "100%",
                          names(Table_count[,2:25]), selected = colnames(Table_count[,2:6]), inline=F),
       numericInput("sample_num", width = "100%",
                   h4("Taille du re-echantillonnage:"),
-                  min=100, max=20000, value=500),
+                  min=2, max=1000, value=5),
       uiOutput("slider_num"),
-      width=3),
+      width=3 ),
   #Graphe barres empilees
     mainPanel(plotlyOutput("histogramme_c"),width=9)
   ),
@@ -274,7 +274,7 @@ shinyApp(
   #Widget change seuil max = nombre individus du re-echantillonnage
     output$slider_num <- renderUI({sliderInput("hist_num", width = "100%",
                   h4("Nombre d'individus minimum (seuil):"),
-                  min=1, max=input$sample_num, step=1, value=20)})
+                  min=2, max=input$sample_num, step=1, value=2)})
   #Graphique creation
     output$histogramme_c <- renderPlotly({
       #recuperer echantillons
@@ -284,7 +284,9 @@ shinyApp(
       #recuperer Taxon
       regular <- paste("^([^\\;]*\\;){",input$taxon_radio,"}[^\\;]*$",sep="")
       graphe_trans <- graphe[str_detect(graphe$taxonomy, regular),] 
-      graphe_t <- graphe_trans[str_detect(graphe_trans$taxonomy, "(unclassified)$",negate=T),]
+      graphe_t <- graphe_trans[str_detect(graphe_trans$taxonomy, "NA",negate=T),]
+      # graphe_t <- graphe_trans
+
       graphe_t$taxonomy <- str_extract(graphe_t$taxonomy,"[^\\;]*$")
       
       #creation des nouveaux echantillons
@@ -300,13 +302,12 @@ shinyApp(
              legend.title= element_text(size=13,face="bold") ) +
        guides(fill=guide_legend(title="Taxons")) +
        xlab("Echantillons") + ylab("Abondance") + ggtitle("Composition des differents echantillons") 
-      ggplotly(g)%>% layout(height = 850)})
+      ggplotly(g)})
       
   },
   options = list(height = 950, width = "100%")
 )
 
 ```
-
 
 

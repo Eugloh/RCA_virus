@@ -4,15 +4,15 @@ rm(list = ls(all = TRUE))
 gc()
 ## plot 
 
-# baseDir <- "~/Documents/ROSARIO/fichiers/RCA_virus"
-# SourceDir <- "~/Documents/ROSARIO/fichiers/RCA_virus/src"
-# OutputDir <- "~/Documents/ROSARIO/fichiers/RCA_virus/plot"
-# DataDir <- "~/Documents/ROSARIO/fichiers/RCA_virus/data"
+baseDir <- "~/Documents/ROSARIO/fichiers/RCA_virus"
+SourceDir <- "~/Documents/ROSARIO/fichiers/RCA_virus/src"
+OutputDir <- "~/Documents/ROSARIO/fichiers/RCA_virus/plot"
+DataDir <- "~/Documents/ROSARIO/fichiers/RCA_virus/data"
 
-baseDir <- "/home/lohmanne/Documents/RCA_virus"
-SourceDir <- "/home/lohmanne/Documents/RCA_virus/src"
-OutputDir <- "/home/lohmanne/Documents/RCA_virus/plot"
-DataDir <- "/home/lohmanne/Documents/RCA_virus/data"
+# baseDir <- "/home/lohmanne/Documents/RCA_virus"
+# SourceDir <- "/home/lohmanne/Documents/RCA_virus/src"
+# OutputDir <- "/home/lohmanne/Documents/RCA_virus/plot"
+# DataDir <- "/home/lohmanne/Documents/RCA_virus/data"
 
 
 setwd(baseDir)
