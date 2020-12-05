@@ -10,15 +10,15 @@ rm(list = ls(all = TRUE))
 gc()
 ## plot 
 
-#baseDir <- "~/Documents/ROSARIO/fichiers/RCA_virus"
-#SourceDir <- "~/Documents/ROSARIO/fichiers/RCA_virus/src"
-#OutputDir <- "~/Documents/ROSARIO/fichiers/RCA_virus/plot"
-#DataDir <- "~/Documents/ROSARIO/fichiers/RCA_virus/data"
+baseDir <- "~/Documents/ROSARIO/fichiers/RCA_virus"
+SourceDir <- "~/Documents/ROSARIO/fichiers/RCA_virus/src"
+OutputDir <- "~/Documents/ROSARIO/fichiers/RCA_virus/plot"
+DataDir <- "~/Documents/ROSARIO/fichiers/RCA_virus/data"
 
-baseDir <- "/home/lohmanne/Documents/RCA_virus"
-SourceDir <- "/home/lohmanne/Documents/RCA_virus/src"
-OutputDir <- "/home/lohmanne/Documents/RCA_virus/plot"
-DataDir <- "/home/lohmanne/Documents/RCA_virus/data"
+# baseDir <- "/home/lohmanne/Documents/RCA_virus"
+# SourceDir <- "/home/lohmanne/Documents/RCA_virus/src"
+# OutputDir <- "/home/lohmanne/Documents/RCA_virus/plot"
+# DataDir <- "/home/lohmanne/Documents/RCA_virus/data"
 
 
 #Librairies et autres
@@ -237,7 +237,7 @@ shinyApp(
       h2(strong("Options :")),
       selectInput("taxon_radio", width = "100%",
                   h4("Niveau taxonomique:"),
-                  choices=list("Description"=0,"order"=1,"family"=2,"genus"=3,"species"=4),selected = 0),
+                  choices=list("Description"=0,"order"=1,"family"=2,"genus"=3,"species"=4),selected = 3),
         checkboxGroupInput("hist_checkbox",
                          h4("Echantillons desires:"), width = "100%",
                          names(Table_count[,2:25]), selected = colnames(Table_count[,2:25]), inline=F),
@@ -251,7 +251,7 @@ shinyApp(
   #Widget change seuil max = nombre individus du re-echantillonnage
     output$slider_num <- renderUI({sliderInput("hist_num", width = "100%",
                   h4("Nombre d'individus minimum (seuil):"),
-                  min=1, max=input$sample_num, step=1, value=20)})
+                  min=1, max=input$sample_num, step=1, value=2)})
   #Graphique creation
     output$histogramme_c <- renderPlotly({
       #recuperer echantillons
@@ -286,4 +286,58 @@ shinyApp(
 
 ```
 
+```{r, include=TRUE, echo=FALSE,warning=FALSE}
+#Barplot espece
 
+taxons_unclass <- Table_count[str_detect(Table_count$taxonomy, "Propionibacterium",negate=T),][1]
+taxons <- unique(str_extract(taxons_unclass$taxonomy,"[^\\;]*$"))
+taxons <- taxons[str_detect(taxons, "NA",negate=T)]
+
+shinyApp(
+
+  ui = fluidPage(
+    #widgets
+    sidebarPanel(
+        h2(strong("Options :")),
+        selectizeInput("taxon_input", h4("Taxon desire:"), taxons, width="100%",
+                    multiple=F,selected="Viruses"),
+        width=3),
+    #barplot
+    mainPanel(plotlyOutput("barplot"),width=9),
+    mainPanel(plotlyOutput("boxplot"),width = 9)
+     
+      ),
+
+  server = function(input, output) {
+    #barplot
+    output$barplot <- renderPlotly({
+      #rechercher le niveau du taxon voulu
+      regular_t <- paste(input$taxon_input,"$",sep="")
+      taxon_detect <- str_count(Table_count[str_detect(Table_count$taxonomy, regular_t),1], ";")
+      
+      #recuperer table avec le meme niveau de taxon que celui choisi
+      regular <- paste("^([^\\;]*\\;){",taxon_detect,"}[^\\;]*$",sep="")
+      graphe_t <- Table_count[str_detect(Table_count$taxonomy, regular),] 
+      
+
+      #extraire le taxon
+      graphe_t <- graphe_t[str_detect(graphe_t$taxonomy, regular_t),]
+
+      #barplot
+      data_graphe <- melt(graphe_t, id.vars=c("taxonomy")) 
+      key <- paste(data_graphe$value / input$sample_number,"% de l'echantillon",sep=" ")
+      p <- ggplot(data_graphe, aes(x=variable,y=value,key=key)) + geom_col(fill="steelblue")  + 
+        theme_classic()+ theme(axis.text.x = element_text(angle=90, hjust=1), plot.title = element_text(color="Black", size=14, face="bold"),
+        axis.title = element_text(face="bold",hjust = 0.5)) +
+        xlab("Echantillons") + ylab("Nombre d'individus (Abondance)") + ggtitle(paste("Composition en ",input$taxon_input,"\ndes differents echantillons", sep=""))
+      ggplotly(p) #%>% layout(height = 500)
+      
+    })
+    
+    #boxplot
+  },
+  options = list(height = 900, width = "100%")
+)
+
+
+```
