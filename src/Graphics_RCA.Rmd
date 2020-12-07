@@ -238,9 +238,12 @@ shinyApp(
       selectInput("taxon_radio", width = "100%",
                   h4("Niveau taxonomique:"),
                   choices=list("Description"=0,"order"=1,"family"=2,"genus"=3,"species"=4),selected = 3),
-        checkboxGroupInput("hist_checkbox",
+
+      checkboxInput("checkbox", "Stacked", value = FALSE),
+              checkboxGroupInput("hist_checkbox",
                          h4("Echantillons desires:"), width = "100%",
                          names(Table_count[,2:25]), selected = colnames(Table_count[,2:25]), inline=F),
+
       uiOutput("slider_num"),
       width=3),
   #Graphe barres empilees
@@ -268,14 +271,17 @@ shinyApp(
       #Graphique barres empilees
       data_graphe <- data.frame(species=graphe_t$taxonomy, melt(graphe_t, id.vars=c("taxonomy"))) %>% select(-taxonomy)
   g <- data_graphe %>% filter(value>=input$hist_num) %>% ggplot(aes(x=variable,y=value,fill=as.factor(species))) + 
-       geom_bar(position="fill",stat="identity") +
+    
+  {if(input$checkbox)geom_bar(position="fill",stat="identity")}+
+  {if(input$checkbox==FALSE)geom_bar(stat="identity")}+
+  
        theme_classic()+theme(axis.text.x = element_text(angle=90, hjust=1), plot.title = element_text(color="Black", size=14, 
                                                                                                       face="bold"),
              axis.title = element_text(face="bold",hjust = 0.5) , legend.direction="horizontal", legend.position = "bottom",
              legend.title= element_text(size=13,face="bold") ) +
        guides(fill=guide_legend(title="Taxons")) +
        xlab("Echantillons") + ylab("Abondance") + ggtitle("Composition des differents echantillons") 
-      ggplotly(g)%>% layout(height = 850)})
+      ggplotly(g)})
       
   },
   options = list(height = 950, width = "100%")
@@ -334,10 +340,14 @@ shinyApp(
       
     })
     
-    #boxplot
+    #boxplot : to do 
   },
   options = list(height = 900, width = "100%")
 )
 
 
+```
+```{r}
+
+sessionInfo()
 ```
