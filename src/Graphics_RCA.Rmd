@@ -10,16 +10,20 @@ rm(list = ls(all = TRUE))
 gc()
 ## plot 
 # 
-# baseDir <- "~/Documents/ROSARIO/fichiers/RCA_virus"
-# SourceDir <- "~/Documents/ROSARIO/fichiers/RCA_virus/src"
-# OutputDir <- "~/Documents/ROSARIO/fichiers/RCA_virus/plot"
-# DataDir <- "~/Documents/ROSARIO/fichiers/RCA_virus/data"
+#baseDir <- "~/Documents/ROSARIO/fichiers/RCA_virus"
+#SourceDir <- "~/Documents/ROSARIO/fichiers/RCA_virus/src"
+#OutputDir <- "~/Documents/ROSARIO/fichiers/RCA_virus/plot"
+#DataDir <- "~/Documents/ROSARIO/fichiers/RCA_virus/data"
 
-baseDir <- "/home/lohmanne/TARIK/RCA_virus"
-SourceDir <- "/home/lohmanne/TARIK/RCA_virus/src"
-OutputDir <- "/home/lohmanne/TARIK/RCA_virus/plot"
-DataDir <- "/home/lohmanne/TARIK/RCA_virus/data"
+#baseDir <- "/home/lohmanne/TARIK/RCA_virus"
+#SourceDir <- "/home/lohmanne/TARIK/RCA_virus/src"
+#OutputDir <- "/home/lohmanne/TARIK/RCA_virus/plot"
+#DataDir <- "/home/lohmanne/TARIK/RCA_virus/data"
 
+baseDir <- "/home/lohmanne/Documents/RCA_virus"
+SourceDir <-"/home/lohmanne/Documents/RCA_virus/src"
+OutputDir <- "/home/lohmanne/Documents/RCA_virus/plot"
+DataDir <-"/home/lohmanne/Documents/RCA_virus/data"
 
 #Librairies et autres
 knitr::opts_chunk$set(echo = TRUE)
@@ -37,7 +41,7 @@ check_packages <- function(x){
 }
 
 
-packages=c("optparse","plotly","rlist","tidyverse","scales","reshape2","ggplot2","stringr","dplyr","tidyr")
+packages=c("optparse","shiny","plotly","rlist","tidyverse","scales","reshape2","ggplot2","stringr","dplyr","tidyr")
 check_packages(packages)
 
 ### Fonctions necessaires ###
@@ -236,13 +240,13 @@ shinyApp(
     sidebarPanel(
       h2(strong("Options :")),
       selectInput("taxon_radio", width = "100%",
-                  h4("Niveau taxonomique:"),
+                  h4("Taxonomic level:"),
                   choices=list("Description"=0,"family"=1,"genus"=2,"species"=3),selected = 2),
 
       checkboxInput("checkboxStacked", "Stacked", value = FALSE),
       checkboxInput("checkboxNa", "Include NA", value = TRUE),
               checkboxGroupInput("hist_checkbox",
-                         h4("Echantillons desires:"), width = "100%",
+                         h4("Desired samples:"), width = "100%",
                          names(Table_count[,2:25]), selected = colnames(Table_count[,2:25]), inline=F),
 
       uiOutput("slider_num"),
@@ -254,7 +258,7 @@ shinyApp(
   server = function(input, output) {
   #Widget change seuil max = nombre individus du re-echantillonnage
     output$slider_num <- renderUI({sliderInput("hist_num", width = "100%",
-                  h4("Nombre d'individus minimum (seuil):"),
+                  h4("Minimum number of individuals (threshold):"),
                   min=1, max=20000, step=1, value=2)})
   #Graphique creation
     output$histogramme_c <- renderPlotly({
@@ -283,8 +287,8 @@ shinyApp(
                                                                                                       face="bold"),
              axis.title = element_text(face="bold",hjust = 0.5) , legend.direction="horizontal", legend.position = "bottom",
              legend.title= element_text(size=13,face="bold") ) +
-       guides(fill=guide_legend(title="Taxons")) +
-       xlab("Echantillons") + ylab("Abondance") + ggtitle("Composition des differents echantillons") 
+       guides(fill=guide_legend(title="Taxa")) +
+       xlab("Samples") + ylab("Abundance") + ggtitle("Composition of the different samples") 
       ggplotly(g)})
       
   },
@@ -309,7 +313,7 @@ shinyApp(
     #widgets
     sidebarPanel(
         h2(strong("Options :")),
-        selectizeInput("taxon_input", h4("Taxon desire:"), taxons, width="100%",
+        selectizeInput("taxon_input", h4("Desire taxa:"), taxons, width="100%",
                     multiple=F,selected="Viruses"),
         width=3),
     #barplot
@@ -339,7 +343,7 @@ shinyApp(
       p <- ggplot(data_graphe, aes(x=variable,y=value,key=key)) + geom_col(fill="steelblue")  + 
         theme_classic()+ theme(axis.text.x = element_text(angle=90, hjust=1), plot.title = element_text(color="Black", size=14, face="bold"),
         axis.title = element_text(face="bold",hjust = 0.5)) +
-        xlab("Echantillons") + ylab("Nombre d'individus (Abondance)") + ggtitle(paste("Composition en ",input$taxon_input,"\ndes differents echantillons", sep=""))
+        xlab("Echantillons") + ylab("Nombre d'individus (Abondance)") + ggtitle(paste(input$taxon_input,"composition of the different samples", sep=" "))
       ggplotly(p) #%>% layout(height = 500)
       
     })
