@@ -5,25 +5,21 @@ output: html_document
 runtime: shiny
 ---
 
+<style type="text/css">
+.main-container {
+  max-width: 1800px;
+  margin-left: auto;
+  margin-right: auto;
+}
+</style>
+
+
 ```{r, include=FALSE}
 rm(list = ls(all = TRUE))
 gc()
 ## plot 
 # 
-#baseDir <- "~/Documents/ROSARIO/fichiers/RCA_virus"
-#SourceDir <- "~/Documents/ROSARIO/fichiers/RCA_virus/src"
-#OutputDir <- "~/Documents/ROSARIO/fichiers/RCA_virus/plot"
-#DataDir <- "~/Documents/ROSARIO/fichiers/RCA_virus/data"
 
-#baseDir <- "/home/lohmanne/TARIK/RCA_virus"
-#SourceDir <- "/home/lohmanne/TARIK/RCA_virus/src"
-#OutputDir <- "/home/lohmanne/TARIK/RCA_virus/plot"
-#DataDir <- "/home/lohmanne/TARIK/RCA_virus/data"
-
-baseDir <- "/home/lohmanne/Documents/RCA_virus"
-SourceDir <-"/home/lohmanne/Documents/RCA_virus/src"
-OutputDir <- "/home/lohmanne/Documents/RCA_virus/plot"
-DataDir <-"/home/lohmanne/Documents/RCA_virus/data"
 
 #Librairies et autres
 knitr::opts_chunk$set(echo = TRUE)
@@ -41,8 +37,15 @@ check_packages <- function(x){
 }
 
 
-packages=c("optparse","shiny","plotly","rlist","tidyverse","scales","reshape2","ggplot2","stringr","dplyr","tidyr")
+packages=c("optparse","shiny","here","plotly","rlist","tidyverse","scales","reshape2","ggplot2","stringr","dplyr","tidyr")
 check_packages(packages)
+
+
+baseDir <- "~/Documents/RCA_virus"
+SourceDir <- file.path(baseDir, "output")
+OutputDir <- file.path(baseDir, "plot")
+DataDir <- file.path(baseDir, "data")
+
 
 ### Fonctions necessaires ###
 sample_table <- function(name_data, data_column, column_taxonomy, sample_size){
@@ -242,24 +245,41 @@ shinyApp(
       selectInput("taxon_radio", width = "100%",
                   h4("Taxonomic level:"),
                   choices=list("Description"=0,"family"=1,"genus"=2,"species"=3),selected = 2),
+      uiOutput("slider_num"),
 
       checkboxInput("checkboxStacked", "Stacked", value = FALSE),
-      checkboxInput("checkboxNa", "Include NA", value = TRUE),
-              checkboxGroupInput("hist_checkbox",
+      checkboxInput("checkboxNa", "Include NA", value = FALSE),  
+      checkboxInput("Log", "Log scale", value = FALSE),  
+      checkboxGroupInput("hist_checkbox",
                          h4("Desired samples:"), width = "100%",
-                         names(Table_count[,2:25]), selected = colnames(Table_count[,2:25]), inline=F),
+                         names(Table_count[,2:25]), selected = colnames(Table_count[,2:13]), inline=F),
+      actionLink("selectall","Select All") ,
 
-      uiOutput("slider_num"),
+      
       width=3),
   #Graphe barres empilees
-    mainPanel(plotlyOutput("histogramme_c"),width=9)
+    mainPanel(plotlyOutput("histogramme_c",width="100%", height= "800px"),width=9,height="100%")
   ),
 
-  server = function(input, output) {
+  server = function(input, session, output) {
+
+
+    observe({
+    if(input$selectall == 0) return(NULL) 
+    else if (input$selectall%%2 == 0)
+    {
+      updateCheckboxGroupInput(session,"hist_checkbox", choices=names(Table_count[,2:25]))
+    }
+    else
+    {
+      updateCheckboxGroupInput(session,"hist_checkbox", choices=names(Table_count[,2:25]),selected=colnames(Table_count[,2:25]))
+    }
+  })
+
   #Widget change seuil max = nombre individus du re-echantillonnage
     output$slider_num <- renderUI({sliderInput("hist_num", width = "100%",
                   h4("Minimum number of individuals (threshold):"),
-                  min=1, max=20000, step=1, value=2)})
+                  min=1, max=2000, step=1, value=20)})
   #Graphique creation
     output$histogramme_c <- renderPlotly({
       #recuperer echantillons
@@ -277,22 +297,27 @@ shinyApp(
               graphe_t$taxonomy <- str_extract(graphe_t$taxonomy,"[^\\;]*$") }
   
       #Graphique barres empilees
-      data_graphe <- data.frame(species=graphe_t$taxonomy, melt(graphe_t, id.vars=c("taxonomy"))) %>% select(-taxonomy)
+  data_graphe <- data.frame(species=graphe_t$taxonomy, melt(graphe_t, id.vars=c("taxonomy"))) %>% select(-taxonomy)
+
   g <- data_graphe %>% filter(value>=input$hist_num) %>% ggplot(aes(x=variable,y=value,fill=as.factor(species))) + 
     
   {if(input$checkboxStacked)geom_bar(position="fill",stat="identity")}+
   {if(input$checkboxStacked==FALSE)geom_bar(stat="identity")}+
+
+  {if(input$Log==TRUE) scale_y_continuous(trans = log10_trans(),
+    breaks = trans_breaks("log10", function(x) 10^x),
+    labels = trans_format("log10", math_format(10^.x))) }+
   
        theme_classic()+theme(axis.text.x = element_text(angle=90, hjust=1), plot.title = element_text(color="Black", size=14, 
                                                                                                       face="bold"),
              axis.title = element_text(face="bold",hjust = 0.5) , legend.direction="horizontal", legend.position = "bottom",
              legend.title= element_text(size=13,face="bold") ) +
        guides(fill=guide_legend(title="Taxa")) +
-       xlab("Samples") + ylab("Abundance") + ggtitle("Composition of the different samples") 
+       xlab("Samples") + { if (input$Log==TRUE) ylab("Log Abundance") } +  { if (input$Log==FALSE) ylab("Abundance") }  + ggtitle(paste0("Composition of the different samples \n minimum threshold at :", input$hist_num, " sequences")) 
       ggplotly(g)})
       
   },
-  options = list(height = 950, width = "100%")
+  options = list(height = 1200, width = "100%")
 )
 
 
@@ -318,7 +343,6 @@ shinyApp(
         width=3),
     #barplot
     mainPanel(plotlyOutput("barplot"),width=9),
-    mainPanel(plotlyOutput("boxplot"),width = 9)
      
       ),
 
