@@ -101,7 +101,7 @@ lineage <- ncbi_virus_lineages[, apply(ncbi_virus_lineages, 2, function(x) !all(
 ### Verif 
 # write.table(lineage, file=paste(baseDir,"lineage","ncbi_lineages-virus_short.csv", sep = "/"), col.names = TRUE , row.names=FALSE, sep=",")
 
-x_<-which(colnames(lineage)%in%c("subkingdom","phylum","no.rank","no.rank1","class", "kingdom", "no.rank2", "no.rank22", "no.rank3", "subclass", "subfamily", "suborder" , "subphylum", "subspecies", "subtribe" ,"superfamily" ))
+x_<-which(colnames(lineage)%in%c("subkingdom","order","phylum","no.rank","no.rank1","class", "kingdom", "no.rank2", "no.rank22", "no.rank3", "subclass", "subfamily", "suborder" , "subphylum", "subspecies", "subtribe" ,"superfamily" ))
 lineage <- lineage[-x_]
 x <- grep(paste(rownames(Data[["Abundance_reduced_taxid"]]),  collapse="|"),lineage$tax_id) # lineage position en récupérant par TAXID
 
@@ -113,7 +113,7 @@ table_analyse$taxonomy<-NA
 for (el in 1:nrow(table_analyse)){
   name=""
 
-  for (i in c("superkingdom","order","family","genus","species")){
+  for (i in c("superkingdom","family","genus","species")){ # removed order for papilloma 
     if (name==""){
       name=table_analyse[el,i]
     }
@@ -152,7 +152,7 @@ dd1 <- merge(tmpNamedtable,tmpdd)
 var_Data <- colnames( dd1[grepl("^RCA",colnames(dd1))])
 
 restructuredData = melt( dd1,
-  id = c("Description","order","family","genus","species"),
+  id = c("Description","family","genus","species"),
     measure.vars = var_Data, 
     variable_name = "number" )
 
@@ -237,9 +237,10 @@ shinyApp(
       h2(strong("Options :")),
       selectInput("taxon_radio", width = "100%",
                   h4("Niveau taxonomique:"),
-                  choices=list("Description"=0,"order"=1,"family"=2,"genus"=3,"species"=4),selected = 3),
+                  choices=list("Description"=0,"family"=1,"genus"=2,"species"=3),selected = 2),
 
-      checkboxInput("checkbox", "Stacked", value = FALSE),
+      checkboxInput("checkboxStacked", "Stacked", value = FALSE),
+      checkboxInput("checkboxNa", "Include NA", value = TRUE),
               checkboxGroupInput("hist_checkbox",
                          h4("Echantillons desires:"), width = "100%",
                          names(Table_count[,2:25]), selected = colnames(Table_count[,2:25]), inline=F),
@@ -254,7 +255,7 @@ shinyApp(
   #Widget change seuil max = nombre individus du re-echantillonnage
     output$slider_num <- renderUI({sliderInput("hist_num", width = "100%",
                   h4("Nombre d'individus minimum (seuil):"),
-                  min=1, max=input$sample_num, step=1, value=2)})
+                  min=1, max=20000, step=1, value=2)})
   #Graphique creation
     output$histogramme_c <- renderPlotly({
       #recuperer echantillons
@@ -264,16 +265,19 @@ shinyApp(
       #recuperer Taxon
       regular <- paste("^([^\\;]*\\;){",input$taxon_radio,"}[^\\;]*$",sep="")
       graphe_trans <- graphe[str_detect(graphe$taxonomy, regular),] 
-      graphe_t <- graphe_trans[str_detect(graphe_trans$taxonomy, "(unclassified)$",negate=T),]
-      graphe_t$taxonomy <- str_extract(graphe_t$taxonomy,"[^\\;]*$")
       
+      if (input$checkboxNa == FALSE){
+      graphe_t <- graphe_trans[str_detect(graphe_trans$taxonomy, "NA",negate=T),]
+      graphe_t$taxonomy <- str_extract(graphe_t$taxonomy,"[^\\;]*$")
+      } else { graphe_t <- graphe_trans
+              graphe_t$taxonomy <- str_extract(graphe_t$taxonomy,"[^\\;]*$") }
   
       #Graphique barres empilees
       data_graphe <- data.frame(species=graphe_t$taxonomy, melt(graphe_t, id.vars=c("taxonomy"))) %>% select(-taxonomy)
   g <- data_graphe %>% filter(value>=input$hist_num) %>% ggplot(aes(x=variable,y=value,fill=as.factor(species))) + 
     
-  {if(input$checkbox)geom_bar(position="fill",stat="identity")}+
-  {if(input$checkbox==FALSE)geom_bar(stat="identity")}+
+  {if(input$checkboxStacked)geom_bar(position="fill",stat="identity")}+
+  {if(input$checkboxStacked==FALSE)geom_bar(stat="identity")}+
   
        theme_classic()+theme(axis.text.x = element_text(angle=90, hjust=1), plot.title = element_text(color="Black", size=14, 
                                                                                                       face="bold"),
