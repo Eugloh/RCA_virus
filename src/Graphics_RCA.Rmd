@@ -9,16 +9,16 @@ runtime: shiny
 rm(list = ls(all = TRUE))
 gc()
 ## plot 
+# 
+# baseDir <- "~/Documents/ROSARIO/fichiers/RCA_virus"
+# SourceDir <- "~/Documents/ROSARIO/fichiers/RCA_virus/src"
+# OutputDir <- "~/Documents/ROSARIO/fichiers/RCA_virus/plot"
+# DataDir <- "~/Documents/ROSARIO/fichiers/RCA_virus/data"
 
-baseDir <- "~/Documents/ROSARIO/fichiers/RCA_virus"
-SourceDir <- "~/Documents/ROSARIO/fichiers/RCA_virus/src"
-OutputDir <- "~/Documents/ROSARIO/fichiers/RCA_virus/plot"
-DataDir <- "~/Documents/ROSARIO/fichiers/RCA_virus/data"
-
-# baseDir <- "/home/lohmanne/Documents/RCA_virus"
-# SourceDir <- "/home/lohmanne/Documents/RCA_virus/src"
-# OutputDir <- "/home/lohmanne/Documents/RCA_virus/plot"
-# DataDir <- "/home/lohmanne/Documents/RCA_virus/data"
+baseDir <- "/home/lohmanne/TARIK/RCA_virus"
+SourceDir <- "/home/lohmanne/TARIK/RCA_virus/src"
+OutputDir <- "/home/lohmanne/TARIK/RCA_virus/plot"
+DataDir <- "/home/lohmanne/TARIK/RCA_virus/data"
 
 
 #Librairies et autres
@@ -29,7 +29,7 @@ check_packages <- function(x){
     #  require returns TRUE invisibly if it was able to load package
     if( ! require( i , character.only = TRUE ) ){
       #  If package was not able to be loaded then re-install
-      install.packages( i , dependencies = TRUE )
+      install.packages( i , dependencies = TRUE ,repos = "https://pbil.univ-lyon1.fr/CRAN/" )
       #  Load package after installing
       require( i , character.only = TRUE )
     }
