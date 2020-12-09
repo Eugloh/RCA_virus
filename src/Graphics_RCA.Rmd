@@ -3,7 +3,6 @@ title: "plot RCA"
 author: "Eugénie LOHMANN"
 output: html_document
 runtime: shiny
-
 ---
 
 <style type="text/css">
@@ -14,8 +13,8 @@ runtime: shiny
 }
 </style>
 
+```{r , include=FALSE, cache=FALSE}
 
-```{r, include=FALSE}
 rm(list = ls(all = TRUE))
 gc()
 ## plot 
@@ -41,11 +40,16 @@ check_packages <- function(x){
 packages=c("optparse","shiny","here","plotly","rlist","tidyverse","scales","reshape2","ggplot2","stringr","dplyr","tidyr")
 check_packages(packages)
 
-
 baseDir <-  str_replace(getwd(),"[\\/][^\\/]*$","")
 SourceDir <- file.path(baseDir, "output")
 OutputDir <- file.path(baseDir, "plot")
 DataDir <- file.path(baseDir, "data")
+```
+
+
+
+```{r, include=FALSE, cache=TRUE}
+
 
 
 ### Fonctions necessaires ###
@@ -228,13 +232,14 @@ for (line in Table_count$taxonomy){
   #grace au vecteur found on sait quelle ligne sont a recuperer dans df et a additionner dans Table_count
 }
 
+# write.csv2(Table_count,paste0(DataDir,"/matrice_comptage_finale.txt"),row.names=F)
 
 ```
 
 
 
 
-```{r, include=TRUE, echo=FALSE,warning=FALSE}
+```{r, include=TRUE, echo=FALSE,warning=FALSE, cache=FALSE}
 # Graphique barres empilees, repartition globale
 
 shinyApp(
@@ -326,7 +331,7 @@ shinyApp(
 
 ```
 
-```{r, include=TRUE, echo=FALSE,warning=FALSE}
+```{r, include=TRUE, echo=FALSE,warning=FALSE, cache=FALSE}
 #Barplot espece
 
 taxons_unclass <- Table_count[str_detect(Table_count$taxonomy, "Propionibacterium",negate=T),][1]

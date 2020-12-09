@@ -1,0 +1,193 @@
+"taxonomy";"RCA.Skin.1";"RCA.Skin.2";"RCA.Skin.3";"RCA.Skin.4";"RCA.Skin.5";"RCA.Skin.6";"RCA.Skin.7";"RCA.Skin.8";"RCA.Skin.9";"RCA.Skin.10";"RCA.Skin.11";"RCA.Skin.12";"RCA.Vulva.1";"RCA.Vulva.2";"RCA.Vulva.3";"RCA.Vulva.4";"RCA.Vulva.5";"RCA.Vulva.6";"RCA.Vulva.7";"RCA.Vulva.8";"RCA.Vulva.9";"RCA.Vulva.10";"RCA.Vulva.11";"RCA.Vulva.12"
+"Viruses";73;7353;38293;4494;90428;502;1098;10987;15799;6771;1711;12638;30;70;28441;467;588;2084;26252;2;1003;185;21;81
+"Viruses;Papillomaviridae";35;5956;36798;534;89909;141;943;10581;15625;4926;200;12160;20;62;27439;463;582;2072;26230;0;998;185;21;81
+"Viruses;Papillomaviridae;Betapapillomavirus";0;2673;19501;213;87086;0;340;3517;14428;2234;55;413;7;59;26227;372;0;2039;88;0;583;177;17;81
+"Viruses;Papillomaviridae;Betapapillomavirus;Betapapillomavirus 1";0;0;0;0;84991;0;340;0;941;894;51;413;7;43;23287;372;0;2037;0;0;370;0;0;0
+"Viruses;Podoviridae";0;0;0;0;0;0;0;0;6;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0
+"Viruses;Podoviridae;Hollowayvirus";0;0;0;0;0;0;0;0;6;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0
+"Viruses;Podoviridae;Hollowayvirus;Pseudomonas virus H66";0;0;0;0;0;0;0;0;6;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0
+"Viruses;Siphoviridae";0;0;8;35;0;0;0;0;6;1572;0;12;2;0;9;0;0;3;22;2;0;0;0;0
+"Viruses;Siphoviridae;NA";0;0;8;35;0;0;0;0;6;0;0;0;2;0;0;0;0;3;22;2;0;0;0;0
+"Viruses;Siphoviridae;NA;Streptococcus virus MS1";0;0;0;0;0;0;0;0;6;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0
+"Viruses;Papillomaviridae;Gammapapillomavirus";31;1192;643;0;115;0;0;3193;23;589;18;11598;0;0;0;0;0;0;0;0;197;0;0;0
+"Viruses;Papillomaviridae;Gammapapillomavirus;Gammapapillomavirus 9";0;0;197;0;0;0;0;0;23;123;0;0;0;0;0;0;0;0;0;0;0;0;0;0
+"Viruses;Papillomaviridae;Betapapillomavirus;Human betapapillomavirus";0;0;0;0;0;0;0;0;6;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0
+"Viruses;Papillomaviridae;Chipapillomavirus";0;0;0;0;0;0;0;0;7;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0
+"Viruses;Papillomaviridae;Chipapillomavirus;Chipapillomavirus 2";0;0;0;0;0;0;0;0;7;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0
+"Viruses;Papillomaviridae;Betapapillomavirus;Betapapillomavirus 2";0;1988;19470;213;2078;0;0;1302;13481;1323;0;0;0;0;18;0;0;2;88;0;54;169;17;81
+"Viruses;Flaviviridae";0;0;0;0;0;0;0;0;0;0;0;0;0;6;0;0;0;0;0;0;0;0;0;0
+"Viruses;Flaviviridae;Flavivirus";0;0;0;0;0;0;0;0;0;0;0;0;0;6;0;0;0;0;0;0;0;0;0;0
+"Viruses;Flaviviridae;Flavivirus;Zika virus";0;0;0;0;0;0;0;0;0;0;0;0;0;6;0;0;0;0;0;0;0;0;0;0
+"Viruses;Polyomaviridae";16;552;1292;3706;398;42;129;398;84;0;29;44;4;0;980;0;0;0;0;0;0;0;0;0
+"Viruses;Polyomaviridae;Betapolyomavirus";0;127;0;0;0;0;0;0;0;0;0;0;4;0;0;0;0;0;0;0;0;0;0;0
+"Viruses;Polyomaviridae;Betapolyomavirus;Human polyomavirus 1";0;37;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0
+"Viruses;Circoviridae";0;816;0;78;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0
+"Viruses;Circoviridae;Cyclovirus";0;816;0;78;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0
+"Viruses;Circoviridae;Cyclovirus;Human associated cyclovirus 8";0;816;0;78;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0
+"Viruses;Papillomaviridae;Gammapapillomavirus;Gammapapillomavirus 1";31;1107;438;0;115;0;0;15;0;68;4;10673;0;0;0;0;0;0;0;0;197;0;0;0
+"Viruses;Papillomaviridae;Gammapapillomavirus;Gammapapillomavirus 8";0;85;0;0;0;0;0;90;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0
+"Viruses;Polyomaviridae;Betapolyomavirus;Human polyomavirus 3";0;90;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0
+"Viruses;Anelloviridae";0;0;0;0;0;0;0;0;0;0;1440;0;0;0;0;0;0;0;0;0;0;0;0;0
+"Viruses;Anelloviridae;NA";0;0;0;0;0;0;0;0;0;0;1440;0;0;0;0;0;0;0;0;0;0;0;0;0
+"Viruses;Anelloviridae;NA;Anelloviridae sp.";0;0;0;0;0;0;0;0;0;0;1398;0;0;0;0;0;0;0;0;0;0;0;0;0
+"Viruses;Herpesviridae";0;27;0;3;33;8;7;6;0;0;38;0;0;0;0;0;2;0;0;0;0;0;0;0
+"Viruses;Herpesviridae;Cytomegalovirus";0;0;0;0;0;0;0;0;0;0;4;0;0;0;0;0;0;0;0;0;0;0;0;0
+"Viruses;Herpesviridae;Cytomegalovirus;Human betaherpesvirus 5";0;0;0;0;0;0;0;0;0;0;4;0;0;0;0;0;0;0;0;0;0;0;0;0
+"Viruses;Anelloviridae;NA;Torque teno virus";0;0;0;0;0;0;0;0;0;0;42;0;0;0;0;0;0;0;0;0;0;0;0;0
+"Viruses;Papillomaviridae;Gammapapillomavirus;Gammapapillomavirus 7";0;0;8;0;0;0;0;0;0;35;4;925;0;0;0;0;0;0;0;0;0;0;0;0
+"Viruses;Genomoviridae";0;0;2;0;0;12;17;0;65;131;0;317;0;0;3;0;0;0;0;0;0;0;0;0
+"Viruses;Genomoviridae;Gemycircularvirus";0;0;0;0;0;6;17;0;0;0;0;4;0;0;0;0;0;0;0;0;0;0;0;0
+"Viruses;Genomoviridae;Gemycircularvirus;Giant panda associated gemycircularvirus";0;0;0;0;0;6;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0
+"Viruses;Genomoviridae;NA";0;0;2;0;0;6;0;0;65;131;0;313;0;0;0;0;0;0;0;0;0;0;0;0
+"Viruses;Genomoviridae;NA;Lepus americanus faeces associated genomovirus SHP216";0;0;0;0;0;6;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0
+"Viruses;Polyomaviridae;Deltapolyomavirus";10;169;9;3659;131;28;115;50;46;0;16;27;0;0;980;0;0;0;0;0;0;0;0;0
+"Viruses;Polyomaviridae;Deltapolyomavirus;Human polyomavirus 7";0;0;0;0;0;6;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0
+"Viruses;Siphoviridae;NA;Streptococcus phage Javan366";0;0;0;10;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0
+"Viruses;Siphoviridae;NA;Streptococcus phage Javan340";0;0;0;12;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0
+"Viruses;Siphoviridae;NA;Streptococcus phage Javan348";0;0;0;13;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0
+"Viruses;Papillomaviridae;Alphapapillomavirus";0;4;14;195;68;0;55;0;0;398;34;0;8;0;0;0;21;4;25844;0;0;0;0;0
+"Viruses;Papillomaviridae;Alphapapillomavirus;Alphapapillomavirus 2";0;0;0;4;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0
+"Viruses;Inoviridae";0;0;0;16;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0
+"Viruses;Inoviridae;NA";0;0;0;16;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0
+"Viruses;Inoviridae;NA;Inoviridae sp.";0;0;0;16;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0
+"Viruses;Papillomaviridae;Alphapapillomavirus;Alphapapillomavirus 1";0;0;0;0;0;0;0;0;0;0;0;0;4;0;0;0;21;4;0;0;0;0;0;0
+"Viruses;Myoviridae";7;2;0;0;0;0;0;0;0;0;0;2;0;0;0;2;0;9;0;0;0;0;0;0
+"Viruses;Myoviridae;NA";0;0;0;0;0;0;0;0;0;0;0;2;0;0;0;2;0;9;0;0;0;0;0;0
+"Viruses;Myoviridae;NA;Acinetobacter virus 133";0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;9;0;0;0;0;0;0
+"Viruses;Papillomaviridae;Alphapapillomavirus;Alphapapillomavirus 10";0;0;0;0;0;0;0;0;0;0;0;0;4;0;0;0;21;0;0;0;0;0;0;0
+"Viruses;Papillomaviridae;Alphapapillomavirus;Alphapapillomavirus 7";0;0;4;0;0;0;0;0;0;0;0;0;4;0;0;0;0;0;18263;0;0;0;0;0
+"Viruses;Polyomaviridae;Betapolyomavirus;Human polyomavirus 2";0;0;0;0;0;0;0;0;0;0;0;0;4;0;0;0;0;0;0;0;0;0;0;0
+"Viruses;Papillomaviridae;Gammapapillomavirus;Gammapapillomavirus 13";31;67;2;0;2;0;0;0;0;0;4;0;0;0;0;0;0;0;0;0;0;0;0;0
+"Viruses;Myoviridae;Tequatrovirus";7;2;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0
+"Viruses;Myoviridae;Tequatrovirus;Escherichia phage vB_EcoM_G4507";7;2;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0
+"Viruses;Papillomaviridae;Gammapapillomavirus;Gammapapillomavirus 11";0;0;0;0;0;0;0;0;0;0;0;10673;0;0;0;0;0;0;0;0;197;0;0;0
+"Viruses;NA";0;0;193;110;0;295;2;2;13;52;4;91;4;2;6;2;4;0;0;0;0;0;0;0
+"Viruses;NA;NA";0;0;193;110;0;295;2;2;13;52;4;91;4;2;6;2;4;0;0;0;0;0;0;0
+"Viruses;NA;NA;uncultured marine virus";0;0;0;0;0;0;0;0;0;0;0;4;0;0;0;0;0;0;0;0;0;0;0;0
+"Viruses;Genomoviridae;Gemycircularvirus;Porcine feces-associated gemycircularvirus";0;0;0;0;0;0;0;0;0;0;0;4;0;0;0;0;0;0;0;0;0;0;0;0
+"Viruses;Genomoviridae;NA;Capybara genomovirus 12";0;0;0;0;0;0;0;0;0;0;0;276;0;0;0;0;0;0;0;0;0;0;0;0
+"Viruses;Siphoviridae;Skunavirus";0;0;0;0;0;0;0;0;0;0;0;12;0;0;0;0;0;0;0;0;0;0;0;0
+"Viruses;Siphoviridae;Skunavirus;Lactococcus phage 936 group phage PhiF0139";0;0;0;0;0;0;0;0;0;0;0;12;0;0;0;0;0;0;0;0;0;0;0;0
+"Viruses;Genomoviridae;NA;Fly associated circular virus 2";0;0;0;0;0;0;0;0;0;0;0;12;0;0;0;0;0;0;0;0;0;0;0;0
+"Viruses;Autographiviridae";0;0;0;0;0;0;0;0;0;0;0;12;0;0;0;0;0;0;0;0;0;0;0;0
+"Viruses;Autographiviridae;Friunavirus";0;0;0;0;0;0;0;0;0;0;0;12;0;0;0;0;0;0;0;0;0;0;0;0
+"Viruses;Autographiviridae;Friunavirus;Acinetobacter phage AbKT21phiIII";0;0;0;0;0;0;0;0;0;0;0;12;0;0;0;0;0;0;0;0;0;0;0;0
+"Viruses;Genomoviridae;NA;Plant associated genomovirus 10";0;0;0;0;0;0;0;0;0;0;0;7;0;0;0;0;0;0;0;0;0;0;0;0
+"Viruses;Papillomaviridae;Betapapillomavirus;Betapapillomavirus 5";0;0;0;0;0;0;0;0;0;0;0;0;0;16;2922;0;0;0;0;0;159;0;0;0
+"Viruses;Retroviridae";15;0;0;12;3;4;0;0;0;14;0;0;0;0;0;0;0;0;0;0;5;0;0;0
+"Viruses;Retroviridae;Lentivirus";0;0;0;0;0;4;0;0;0;0;0;0;0;0;0;0;0;0;0;0;5;0;0;0
+"Viruses;Retroviridae;Lentivirus;Human immunodeficiency virus 1";0;0;0;0;0;4;0;0;0;0;0;0;0;0;0;0;0;0;0;0;5;0;0;0
+"Viruses;Papillomaviridae;Lambdapapillomavirus";0;0;0;0;0;0;0;10;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0
+"Viruses;Papillomaviridae;Lambdapapillomavirus;Lambdapapillomavirus 1";0;0;0;0;0;0;0;10;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0
+"Viruses;Papillomaviridae;Gammapapillomavirus;Gammapapillomavirus 23";0;0;0;0;0;0;0;2887;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0
+"Viruses;Myoviridae;NA;Acinetobacter phage TAC1";0;0;0;0;0;0;0;0;0;0;0;2;0;0;0;2;0;0;0;0;0;0;0;0
+"Viruses;Genomoviridae;NA;Genomoviridae sp.";0;0;2;0;0;0;0;0;0;0;0;18;0;0;0;0;0;0;0;0;0;0;0;0
+"Viruses;Papillomaviridae;Dyothetapapillomavirus";0;0;3;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0
+"Viruses;Papillomaviridae;Dyothetapapillomavirus;Dyothetapapillomavirus 1";0;0;3;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0
+"Viruses;Siphoviridae;NA;Siphovirus contig89";0;0;8;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0
+"Viruses;Siphoviridae;Pahexavirus";0;0;0;0;0;0;0;0;0;1572;0;0;0;0;0;0;0;0;0;0;0;0;0;0
+"Viruses;Siphoviridae;Pahexavirus;Propionibacterium virus P91";0;0;0;0;0;0;0;0;0;10;0;0;0;0;0;0;0;0;0;0;0;0;0;0
+"Viruses;Siphoviridae;Pahexavirus;Propionibacterium phage PAC1";0;0;0;0;0;0;0;0;0;100;0;0;0;0;0;0;0;0;0;0;0;0;0;0
+"Viruses;Siphoviridae;Pahexavirus;Propionibacterium virus PHL092M00";0;0;0;0;0;0;0;0;0;33;0;0;0;0;0;0;0;0;0;0;0;0;0;0
+"Viruses;Siphoviridae;Pahexavirus;Propionibacterium virus Stormborn";0;0;0;0;0;0;0;0;0;33;0;0;0;0;0;0;0;0;0;0;0;0;0;0
+"Viruses;Siphoviridae;Pahexavirus;Propionibacterium phage pa63";0;0;0;0;0;0;0;0;0;33;0;0;0;0;0;0;0;0;0;0;0;0;0;0
+"Viruses;Siphoviridae;Pahexavirus;Propionibacterium virus PHL179M00";0;0;0;0;0;0;0;0;0;12;0;0;0;0;0;0;0;0;0;0;0;0;0;0
+"Viruses;Siphoviridae;Pahexavirus;Propionibacterium virus PHL113M01";0;0;0;0;0;0;0;0;0;26;0;0;0;0;0;0;0;0;0;0;0;0;0;0
+"Viruses;Siphoviridae;Pahexavirus;Propionibacterium phage BruceLethal";0;0;0;0;0;0;0;0;0;26;0;0;0;0;0;0;0;0;0;0;0;0;0;0
+"Viruses;Siphoviridae;Pahexavirus;Propionibacterium virus PHL132N00";0;0;0;0;0;0;0;0;0;14;0;0;0;0;0;0;0;0;0;0;0;0;0;0
+"Viruses;Retroviridae;Gammaretrovirus";15;0;0;12;3;0;0;0;0;14;0;0;0;0;0;0;0;0;0;0;0;0;0;0
+"Viruses;Retroviridae;Gammaretrovirus;Moloney murine sarcoma virus";15;0;0;12;0;0;0;0;0;14;0;0;0;0;0;0;0;0;0;0;0;0;0;0
+"Viruses;Siphoviridae;Pahexavirus;Propionibacterium phage pa33";0;0;0;0;0;0;0;0;0;15;0;0;0;0;0;0;0;0;0;0;0;0;0;0
+"Viruses;Siphoviridae;Pahexavirus;Propionibacterium virus PHL141N00";0;0;0;0;0;0;0;0;0;32;0;0;0;0;0;0;0;0;0;0;0;0;0;0
+"Viruses;Siphoviridae;Pahexavirus;Propionibacterium virus PHL194M00";0;0;0;0;0;0;0;0;0;32;0;0;0;0;0;0;0;0;0;0;0;0;0;0
+"Viruses;Siphoviridae;Pahexavirus;Propionibacterium phage pa29399-1-D_2";0;0;0;0;0;0;0;0;0;17;0;0;0;0;0;0;0;0;0;0;0;0;0;0
+"Viruses;Siphoviridae;Pahexavirus;Propionibacterium virus P100D";0;0;0;0;0;0;0;0;0;36;0;0;0;0;0;0;0;0;0;0;0;0;0;0
+"Viruses;Siphoviridae;Pahexavirus;Propionibacterium virus SKKY";0;0;0;0;0;0;0;0;0;36;0;0;0;0;0;0;0;0;0;0;0;0;0;0
+"Viruses;Siphoviridae;Pahexavirus;Propionibacterium phage pa9-6919-4";0;0;0;0;0;0;0;0;0;19;0;0;0;0;0;0;0;0;0;0;0;0;0;0
+"Viruses;Siphoviridae;Pahexavirus;Propionibacterium virus P104A";0;0;0;0;0;0;0;0;0;10;0;0;0;0;0;0;0;0;0;0;0;0;0;0
+"Viruses;Siphoviridae;Pahexavirus;Propionibacterium virus Procrass1";0;0;0;0;0;0;0;0;0;10;0;0;0;0;0;0;0;0;0;0;0;0;0;0
+"Viruses;Siphoviridae;Pahexavirus;Propionibacterium virus PAD20";0;0;0;0;0;0;0;0;0;10;0;0;0;0;0;0;0;0;0;0;0;0;0;0
+"Viruses;Siphoviridae;Pahexavirus;Propionibacterium virus PAS50";0;0;0;0;0;0;0;0;0;10;0;0;0;0;0;0;0;0;0;0;0;0;0;0
+"Viruses;Geminiviridae";0;0;0;0;0;0;0;0;0;76;0;0;0;0;0;0;0;0;0;0;0;0;0;0
+"Viruses;Geminiviridae;Begomovirus";0;0;0;0;0;0;0;0;0;76;0;0;0;0;0;0;0;0;0;0;0;0;0;0
+"Viruses;Geminiviridae;Begomovirus;Sida golden mosaic Buckup virus";0;0;0;0;0;0;0;0;0;34;0;0;0;0;0;0;0;0;0;0;0;0;0;0
+"Viruses;Papillomaviridae;Betapapillomavirus;Betapapillomavirus 3";0;685;31;0;17;0;0;2215;0;17;4;0;0;0;0;0;0;0;0;0;0;8;0;0
+"Viruses;Siphoviridae;Pahexavirus;Propionibacterium phage PA1-14";0;0;0;0;0;0;0;0;0;42;0;0;0;0;0;0;0;0;0;0;0;0;0;0
+"Viruses;Siphoviridae;Pahexavirus;Propionibacterium phage pa615";0;0;0;0;0;0;0;0;0;42;0;0;0;0;0;0;0;0;0;0;0;0;0;0
+"Viruses;Siphoviridae;Pahexavirus;Propionibacterium virus P101A";0;0;0;0;0;0;0;0;0;22;0;0;0;0;0;0;0;0;0;0;0;0;0;0
+"Viruses;Siphoviridae;Pahexavirus;Propionibacterium virus Attacne";0;0;0;0;0;0;0;0;0;23;0;0;0;0;0;0;0;0;0;0;0;0;0;0
+"Viruses;Siphoviridae;Pahexavirus;Propionibacterium phage MEAK";0;0;0;0;0;0;0;0;0;25;0;0;0;0;0;0;0;0;0;0;0;0;0;0
+"Viruses;Siphoviridae;Pahexavirus;Propionibacterium virus PHL111M01";0;0;0;0;0;0;0;0;0;15;0;0;0;0;0;0;0;0;0;0;0;0;0;0
+"Viruses;Siphoviridae;Pahexavirus;Propionibacterium virus PHL112N00";0;0;0;0;0;0;0;0;0;15;0;0;0;0;0;0;0;0;0;0;0;0;0;0
+"Viruses;Siphoviridae;Pahexavirus;Propionibacterium phage LilBandit";0;0;0;0;0;0;0;0;0;15;0;0;0;0;0;0;0;0;0;0;0;0;0;0
+"Viruses;Siphoviridae;Pahexavirus;Propionibacterium phage Supernova";0;0;0;0;0;0;0;0;0;15;0;0;0;0;0;0;0;0;0;0;0;0;0;0
+"Viruses;Siphoviridae;Pahexavirus;Propionibacterium virus PA6";0;0;0;0;0;0;0;0;0;15;0;0;0;0;0;0;0;0;0;0;0;0;0;0
+"Viruses;Siphoviridae;Pahexavirus;Propionibacterium virus PHL082M03";0;0;0;0;0;0;0;0;0;31;0;0;0;0;0;0;0;0;0;0;0;0;0;0
+"Viruses;Siphoviridae;Pahexavirus;Propionibacterium virus PHL025M00";0;0;0;0;0;0;0;0;0;33;0;0;0;0;0;0;0;0;0;0;0;0;0;0
+"Viruses;Papillomaviridae;Gammapapillomavirus;Gammapapillomavirus 24";0;0;0;0;0;0;0;201;0;363;10;0;0;0;0;0;0;0;0;0;0;0;0;0
+"Viruses;Siphoviridae;Pahexavirus;Propionibacterium virus P105";0;0;0;0;0;0;0;0;0;39;0;0;0;0;0;0;0;0;0;0;0;0;0;0
+"Viruses;Siphoviridae;Pahexavirus;Propionibacterium virus ATCC29399BC";0;0;0;0;0;0;0;0;0;16;0;0;0;0;0;0;0;0;0;0;0;0;0;0
+"Viruses;Siphoviridae;Pahexavirus;Propionibacterium virus PHL070N00";0;0;0;0;0;0;0;0;0;16;0;0;0;0;0;0;0;0;0;0;0;0;0;0
+"Viruses;Siphoviridae;Pahexavirus;Propionibacterium virus Keiki";0;0;0;0;0;0;0;0;0;16;0;0;0;0;0;0;0;0;0;0;0;0;0;0
+"Viruses;Siphoviridae;Pahexavirus;Propionibacterium phage PacnesP1";0;0;0;0;0;0;0;0;0;16;0;0;0;0;0;0;0;0;0;0;0;0;0;0
+"Viruses;Geminiviridae;Begomovirus;Sida golden mottle virus";0;0;0;0;0;0;0;0;0;42;0;0;0;0;0;0;0;0;0;0;0;0;0;0
+"Viruses;NA;NA;Circular genetic element sp.";0;0;2;0;0;14;0;2;13;44;4;85;0;0;0;0;0;0;0;0;0;0;0;0
+"Viruses;Siphoviridae;Pahexavirus;Propionibacterium virus PHL009M11";0;0;0;0;0;0;0;0;0;46;0;0;0;0;0;0;0;0;0;0;0;0;0;0
+"Viruses;Siphoviridae;Pahexavirus;Propionibacterium virus PHL067M01";0;0;0;0;0;0;0;0;0;10;0;0;0;0;0;0;0;0;0;0;0;0;0;0
+"Viruses;Siphoviridae;Pahexavirus;Propionibacterium virus PHL117M01";0;0;0;0;0;0;0;0;0;10;0;0;0;0;0;0;0;0;0;0;0;0;0;0
+"Viruses;Siphoviridae;Pahexavirus;Propionibacterium virus Wizzo";0;0;0;0;0;0;0;0;0;24;0;0;0;0;0;0;0;0;0;0;0;0;0;0
+"Viruses;Siphoviridae;Pahexavirus;Propionibacterium phage pa28";0;0;0;0;0;0;0;0;0;24;0;0;0;0;0;0;0;0;0;0;0;0;0;0
+"Viruses;Siphoviridae;Pahexavirus;Propionibacterium phage pa35";0;0;0;0;0;0;0;0;0;24;0;0;0;0;0;0;0;0;0;0;0;0;0;0
+"Viruses;NA;NA;CRESS virus sp.";0;0;0;83;0;0;0;0;0;6;0;0;0;0;0;0;0;0;0;0;0;0;0;0
+"Viruses;Papillomaviridae;Gammapapillomavirus;Gammapapillomavirus 15";0;0;0;0;0;0;0;0;0;68;0;0;0;0;0;0;0;0;0;0;0;0;0;0
+"Viruses;Siphoviridae;Pahexavirus;Propionibacterium phage PHL116M10";0;0;0;0;0;0;0;0;0;35;0;0;0;0;0;0;0;0;0;0;0;0;0;0
+"Viruses;Siphoviridae;Pahexavirus;Propionibacterium phage Enoki";0;0;0;0;0;0;0;0;0;35;0;0;0;0;0;0;0;0;0;0;0;0;0;0
+"Viruses;Siphoviridae;Pahexavirus;Propionibacterium virus MrAK";0;0;0;0;0;0;0;0;0;35;0;0;0;0;0;0;0;0;0;0;0;0;0;0
+"Viruses;Siphoviridae;Pahexavirus;Propionibacterium phage pa27";0;0;0;0;0;0;0;0;0;35;0;0;0;0;0;0;0;0;0;0;0;0;0;0
+"Viruses;Siphoviridae;Pahexavirus;Propionibacterium virus PHL037M02";0;0;0;0;0;0;0;0;0;48;0;0;0;0;0;0;0;0;0;0;0;0;0;0
+"Viruses;Siphoviridae;Pahexavirus;Propionibacterium virus PHL071N05";0;0;0;0;0;0;0;0;0;48;0;0;0;0;0;0;0;0;0;0;0;0;0;0
+"Viruses;Siphoviridae;Pahexavirus;Propionibacterium virus Kubed";0;0;0;0;0;0;0;0;0;48;0;0;0;0;0;0;0;0;0;0;0;0;0;0
+"Viruses;Siphoviridae;Pahexavirus;Propionibacterium virus Pirate";0;0;0;0;0;0;0;0;0;48;0;0;0;0;0;0;0;0;0;0;0;0;0;0
+"Viruses;Siphoviridae;Pahexavirus;Propionibacterium phage Leviosa";0;0;0;0;0;0;0;0;0;48;0;0;0;0;0;0;0;0;0;0;0;0;0;0
+"Viruses;Genomoviridae;NA;Capybara genomovirus 9";0;0;0;0;0;0;0;0;0;48;0;0;0;0;0;0;0;0;0;0;0;0;0;0
+"Viruses;Genomoviridae;NA;Thrips-associated genomovirus 2";0;0;0;0;0;0;0;0;65;83;0;0;0;0;0;0;0;0;0;0;0;0;0;0
+"Viruses;Siphoviridae;Pahexavirus;Propionibacterium virus PHL060L00";0;0;0;0;0;0;0;0;0;36;0;0;0;0;0;0;0;0;0;0;0;0;0;0
+"Viruses;Siphoviridae;Pahexavirus;Propionibacterium virus PHL041M10";0;0;0;0;0;0;0;0;0;36;0;0;0;0;0;0;0;0;0;0;0;0;0;0
+"Viruses;Siphoviridae;Pahexavirus;Propionibacterium phage Aquarius";0;0;0;0;0;0;0;0;0;36;0;0;0;0;0;0;0;0;0;0;0;0;0;0
+"Viruses;Siphoviridae;Pahexavirus;Propionibacterium phage DrParker";0;0;0;0;0;0;0;0;0;36;0;0;0;0;0;0;0;0;0;0;0;0;0;0
+"Viruses;Siphoviridae;NA;Streptococcus phage SW27";0;0;0;0;0;0;0;0;0;0;0;0;2;0;0;0;0;0;22;0;0;0;0;0
+"Viruses;Papillomaviridae;Alphapapillomavirus;Alphapapillomavirus 6";0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;7581;0;0;0;0;0
+"Viruses;Herelleviridae";0;0;0;0;0;0;0;0;0;0;0;0;0;0;4;0;0;0;0;0;0;0;0;0
+"Viruses;Herelleviridae;Sepunavirus";0;0;0;0;0;0;0;0;0;0;0;0;0;0;4;0;0;0;0;0;0;0;0;0
+"Viruses;Herelleviridae;Sepunavirus;Staphylococcus phage Quidividi";0;0;0;0;0;0;0;0;0;0;0;0;0;0;4;0;0;0;0;0;0;0;0;0
+"Viruses;NA;NA;Bacteriophage sp.";0;0;0;0;0;0;0;0;0;0;0;0;4;0;2;2;0;0;0;0;0;0;0;0
+"Viruses;Genomoviridae;Gemykibivirus";0;0;0;0;0;0;0;0;0;0;0;0;0;0;3;0;0;0;0;0;0;0;0;0
+"Viruses;Genomoviridae;Gemykibivirus;Human associated gemykibivirus 1";0;0;0;0;0;0;0;0;0;0;0;0;0;0;3;0;0;0;0;0;0;0;0;0
+"Viruses;Siphoviridae;Phietavirus";0;0;0;0;0;0;0;0;0;0;0;0;0;0;9;0;0;0;0;0;0;0;0;0
+"Viruses;Siphoviridae;Phietavirus;Staphylococcus virus IPLA7";0;0;0;0;0;0;0;0;0;0;0;0;0;0;9;0;0;0;0;0;0;0;0;0
+"Viruses;Genomoviridae;Gemycircularvirus;Canine feces-associated gemycircularvirus";0;0;0;0;0;0;17;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0
+"Viruses;NA;NA;uncultured Caudovirales phage";0;0;0;0;0;0;2;0;0;0;0;0;0;2;0;0;0;0;0;0;0;0;0;0
+"Viruses;Polyomaviridae;NA";0;239;234;41;63;14;14;21;7;0;6;6;0;0;0;0;0;0;0;0;0;0;0;0
+"Viruses;Polyomaviridae;NA;Cat associated lyon-IARC polyomavirus";0;9;19;4;0;0;4;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0
+"Viruses;Polyomaviridae;Deltapolyomavirus;Human polyomavirus 6";0;0;0;3631;0;0;94;22;46;0;16;0;0;0;980;0;0;0;0;0;0;0;0;0
+"Viruses;Siphoviridae;NA;Corynebacterium phage IME1320_01";0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;3;0;2;0;0;0;0
+"Viruses;NA;NA;uncultured virus";0;0;191;27;0;281;0;0;0;2;0;2;0;0;4;0;4;0;0;0;0;0;0;0
+"Viruses;Papillomaviridae;NA";4;2087;16637;126;2640;141;548;3861;1167;1705;93;149;5;3;1212;91;561;29;298;0;218;8;4;0
+"Viruses;Papillomaviridae;NA;uncultured Papillomavirus";0;284;0;0;129;0;0;0;0;0;73;0;0;0;0;0;0;0;0;0;0;0;0;0
+"Viruses;Polyomaviridae;Deltapolyomavirus;Human polyomavirus 10";10;169;9;28;131;22;21;28;0;0;0;27;0;0;0;0;0;0;0;0;0;0;0;0
+"Viruses;Polyomaviridae;Alphapolyomavirus";6;17;1049;6;204;0;0;327;31;0;7;11;0;0;0;0;0;0;0;0;0;0;0;0
+"Viruses;Polyomaviridae;Alphapolyomavirus;Human polyomavirus 5";6;17;1049;6;204;0;0;327;31;0;7;11;0;0;0;0;0;0;0;0;0;0;0;0
+"Viruses;Baculoviridae";0;0;0;0;85;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0
+"Viruses;Baculoviridae;Betabaculovirus";0;0;0;0;2;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0
+"Viruses;Baculoviridae;Betabaculovirus;Spodoptera frugiperda granulovirus";0;0;0;0;2;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0
+"Viruses;Papillomaviridae;NA;Human papillomavirus";4;1803;16637;126;2511;141;548;3861;1167;1705;20;149;5;3;1212;91;561;29;298;0;218;8;4;0
+"Viruses;Herpesviridae;Varicellovirus";0;0;0;3;28;3;7;0;0;0;34;0;0;0;0;0;0;0;0;0;0;0;0;0
+"Viruses;Herpesviridae;Varicellovirus;Suid alphaherpesvirus 1";0;0;0;3;28;3;7;0;0;0;34;0;0;0;0;0;0;0;0;0;0;0;0;0
+"Viruses;Retroviridae;Gammaretrovirus;Murine leukemia virus";0;0;0;0;3;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0
+"Viruses;Papillomaviridae;Gammapapillomavirus;Gammapapillomavirus 12";0;0;436;0;103;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0
+"Viruses;Herpesviridae;Lymphocryptovirus";0;27;0;0;5;5;0;6;0;0;0;0;0;0;0;0;2;0;0;0;0;0;0;0
+"Viruses;Herpesviridae;Lymphocryptovirus;Human gammaherpesvirus 4";0;27;0;0;5;5;0;6;0;0;0;0;0;0;0;0;2;0;0;0;0;0;0;0
+"Viruses;Polyomaviridae;NA;LI polyomavirus";0;230;215;37;63;14;10;21;7;0;6;6;0;0;0;0;0;0;0;0;0;0;0;0
+"Viruses;Papillomaviridae;Alphapapillomavirus;Alphapapillomavirus 9";0;4;10;191;68;0;55;0;0;398;34;0;0;0;0;0;0;0;0;0;0;0;0;0
+"Viruses;Baculoviridae;Alphabaculovirus";0;0;0;0;83;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0
+"Viruses;Baculoviridae;Alphabaculovirus;Spodoptera frugiperda multiple nucleopolyhedrovirus";0;0;0;0;83;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0
