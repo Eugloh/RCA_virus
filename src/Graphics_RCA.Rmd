@@ -374,11 +374,10 @@ shinyApp(
         theme_classic()+ theme(axis.text.x = element_text(angle=90, hjust=1), plot.title = element_text(color="Black", size=14, face="bold"),
         axis.title = element_text(face="bold",hjust = 0.5)) +
         xlab("Echantillons") + ylab("Nombre d'individus (Abondance)") + ggtitle(paste(input$taxon_input,"composition of the different samples", sep=" "))
-      ggplotly(p) #%>% layout(height = 500)
+      ggplotly(p) 
       
     })
     
-    #boxplot : to do 
   },
   options = list(height = 900, width = "100%")
 )
@@ -387,7 +386,7 @@ shinyApp(
 ```
 
 
-```{r, include=TRUE, eval = FALSE, echo=FALSE,warning=FALSE}
+```{r, include=TRUE, eval = TRUE, echo=FALSE,warning=FALSE}
 # Heatmap
 
 shinyApp(
@@ -400,17 +399,13 @@ shinyApp(
                   h4("Taxonomic level:"),
                   choices=list("Description"=0,"family"=1,"genus"=2,"species"=3),selected = 2),
       uiOutput("slider_num"),
-
-      checkboxGroupInput("hist_checkbox",
-                         h4("Desired samples:"), width = "100%",
-                         names(Table_count[,2:25]), selected = colnames(Table_count[,2:13]), inline=F),
-      actionLink("selectall","Select All") ,
-
-      width=3),
+      checkboxInput("checkboxNa", "Include NA", value = FALSE),  
+            width=3),
   #Graphe barres empilees
     mainPanel(plotlyOutput("heatmap",width="100%", height= "800px"),width=9,height="100%")
   ),
 
+ 
   server = function(input, session, output) {
 
 
@@ -421,12 +416,9 @@ shinyApp(
   #Graphique creation
     output$heatmap <- renderPlotly({
       #recuperer echantillons
-      graphe <- data.frame(subset.data.frame(Table_count, select = input$hist_checkbox))
-      graphe$taxonomy <- Table_count$taxonomy
-      
       #recuperer Taxon
       regular <- paste("^([^\\;]*\\;){",input$taxon_radio,"}[^\\;]*$",sep="")
-      graphe_trans <- graphe[str_detect(graphe$taxonomy, regular),] 
+      graphe_trans <- Table_count[str_detect(Table_count$taxonomy, regular),] 
       
       if (input$checkboxNa == FALSE){
       graphe_t <- graphe_trans[str_detect(graphe_trans$taxonomy, "NA",negate=T),]
@@ -437,9 +429,9 @@ shinyApp(
       #Graphique barres empilees
   data_graphe <- data.frame(species=graphe_t$taxonomy, melt(graphe_t, id.vars=c("taxonomy"))) %>% select(-taxonomy)
 
- g <- data_graphe %>% filter(value>=2) %>%  ggplot(aes(x=variable,y=value)) + 
-  geom_tile(aes(fill = rescale), colour = "white") + 
-  scale_fill_gradient(low = "white",high = "steelblue")
+  g <- data_graphe %>% filter(value>=input$hist_num) %>% ggplot(aes(x=variable,y=species,fill=value)) +   geom_tile()+
+  
+       theme_classic()+theme(axis.text.x = element_text(angle=90, hjust=1), plot.title = element_text(color="Black", size=14, face="bold")) 
       ggplotly(g)})
       
   },
