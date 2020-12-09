@@ -176,9 +176,7 @@ levels(restructuredData$variable) <- c( "RCA.Skin.1","RCA.Skin.2", "RCA.Skin.3",
                                         "RCA.Vulva.4","RCA.Vulva.5" , "RCA.Vulva.6" ,"RCA.Vulva.7","RCA.Vulva.8",
                                         "RCA.Vulva.9","RCA.Vulva.10", "RCA.Vulva.11" ,"RCA.Vulva.12" )
 
-restructuredData$from_ <- "Skin"
-restructuredData$from_[which(grepl("Vulva", restructuredData$variable))] <- "Vulva"
-
+restructuredData$from_ <- ifelse(grepl("Vulva", restructuredData$variable) == 0, "Skin", "Vulva")
 
 
 ## table without all the 0 values 
@@ -234,6 +232,10 @@ for (line in Table_count$taxonomy){
 
 # write.csv2(Table_count,paste0(DataDir,"/matrice_comptage_finale.txt"),row.names=F)
 
+colnames(Table_count)<- str_replace(colnames(Table_count), "RCA.", "")
+
+
+
 ```
 
 
@@ -264,7 +266,7 @@ shinyApp(
       
       width=3),
   #Graphe barres empilees
-    mainPanel(plotlyOutput("histogramme_c",width="100%", height= "800px"),width=9,height="100%")
+    mainPanel(plotlyOutput("histogramme_c",width="100%", height= "1200px"),width=9,height="100%")
   ),
 
   server = function(input, session, output) {
@@ -323,7 +325,7 @@ shinyApp(
       ggplotly(g)})
       
   },
-  options = list(height = 1200, width = "100%")
+  options = list(height = 1400, width = "100%")
 )
 
 
@@ -379,7 +381,7 @@ shinyApp(
     })
     
   },
-  options = list(height = 900, width = "100%")
+  options = list(height = 400, width = "100%")
 )
 
 
@@ -428,14 +430,18 @@ shinyApp(
   
       #Graphique barres empilees
   data_graphe <- data.frame(species=graphe_t$taxonomy, melt(graphe_t, id.vars=c("taxonomy"))) %>% select(-taxonomy)
-
+  data_graphe$categorie <- ifelse(grepl("Vulva", data_graphe$variable) == 0, "Skin", "Vulva")
+  a <- ifelse(data_graphe$categorie == "Skin", "red", "blue")
   g <- data_graphe %>% filter(value>=input$hist_num) %>% ggplot(aes(x=variable,y=species,fill=value)) +   geom_tile()+
   
-       theme_classic()+theme(axis.text.x = element_text(angle=90, hjust=1), plot.title = element_text(color="Black", size=14, face="bold")) 
+       theme_classic()+theme(axis.text.x = element_text(angle=90, hjust=1, color=a), plot.title = element_text(color="Black", size=14, face="bold"),
+             axis.title = element_text(face="bold",hjust = 0.5) , legend.direction="horizontal", legend.position = "bottom",legend.title= element_text(size=13,face="bold") ) +
+       guides(fill=guide_legend(title="Taxa")) +
+       xlab("Samples") +  ggtitle(paste0("Heatmap \n minimum threshold at :", input$hist_num, " sequences")) 
       ggplotly(g)})
       
   },
-  options = list(height = 1200, width = "100%")
+  options = list(height = 800, width = "100%")
 )
 
 
