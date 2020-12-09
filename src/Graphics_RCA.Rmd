@@ -41,7 +41,7 @@ packages=c("optparse","shiny","here","plotly","rlist","tidyverse","scales","resh
 check_packages(packages)
 
 
-baseDir <- "~/Documents/RCA_virus"
+baseDir <- "~/Documents/ROSARIO/fichiers/RCA_virus"
 SourceDir <- file.path(baseDir, "output")
 OutputDir <- file.path(baseDir, "plot")
 DataDir <- file.path(baseDir, "data")
@@ -92,7 +92,7 @@ for (el in csvFile){
   el_name <- sapply(strsplit(as.character(el), "\\."), "[[", 1)
   Data[[el_name]] <- read.delim(paste(DataDir,el, sep = "/"), row.names=1)
 }
-ncbi_virus_lineages <- read.csv(paste(baseDir,"lineage","ncbi_lineages-virus.csv", sep = "/"))
+ncbi_virus_lineages <-read.csv(paste(baseDir,"lineage","ncbi_lineages-virus.csv", sep = "/"))
 # je mets des NA partout ici 
 
 for (i in colnames(ncbi_virus_lineages)){
@@ -379,6 +379,76 @@ shinyApp(
 
 
 ```
+
+
+```{r, include=TRUE, eval = FALSE, echo=FALSE,warning=FALSE}
+# Heatmap
+
+shinyApp(
+
+  ui = fluidPage(
+  #Widgets 
+    sidebarPanel(
+      h2(strong("Options :")),
+      selectInput("taxon_radio", width = "100%",
+                  h4("Taxonomic level:"),
+                  choices=list("Description"=0,"family"=1,"genus"=2,"species"=3),selected = 2),
+      uiOutput("slider_num"),
+
+      checkboxGroupInput("hist_checkbox",
+                         h4("Desired samples:"), width = "100%",
+                         names(Table_count[,2:25]), selected = colnames(Table_count[,2:13]), inline=F),
+      actionLink("selectall","Select All") ,
+
+      width=3),
+  #Graphe barres empilees
+    mainPanel(plotlyOutput("heatmap",width="100%", height= "800px"),width=9,height="100%")
+  ),
+
+  server = function(input, session, output) {
+
+
+  #Widget change seuil max = nombre individus du re-echantillonnage
+    output$slider_num <- renderUI({sliderInput("hist_num", width = "100%",
+                  h4("Minimum number of individuals (threshold):"),
+                  min=1, max=2000, step=1, value=20)})
+  #Graphique creation
+    output$heatmap <- renderPlotly({
+      #recuperer echantillons
+      graphe <- data.frame(subset.data.frame(Table_count, select = input$hist_checkbox))
+      graphe$taxonomy <- Table_count$taxonomy
+      
+      #recuperer Taxon
+      regular <- paste("^([^\\;]*\\;){",input$taxon_radio,"}[^\\;]*$",sep="")
+      graphe_trans <- graphe[str_detect(graphe$taxonomy, regular),] 
+      
+      if (input$checkboxNa == FALSE){
+      graphe_t <- graphe_trans[str_detect(graphe_trans$taxonomy, "NA",negate=T),]
+      graphe_t$taxonomy <- str_extract(graphe_t$taxonomy,"[^\\;]*$")
+      } else { graphe_t <- graphe_trans
+              graphe_t$taxonomy <- str_extract(graphe_t$taxonomy,"[^\\;]*$") }
+  
+      #Graphique barres empilees
+  data_graphe <- data.frame(species=graphe_t$taxonomy, melt(graphe_t, id.vars=c("taxonomy"))) %>% select(-taxonomy)
+
+ g <- data_graphe %>% filter(value>=2) %>%  ggplot(aes(x=variable,y=value)) + 
+  geom_tile(aes(fill = rescale), colour = "white") + 
+  scale_fill_gradient(low = "white",high = "steelblue")
+      ggplotly(g)})
+      
+  },
+  options = list(height = 1200, width = "100%")
+)
+
+
+
+
+```
+
+
+
+
+
 ```{r}
 
 sessionInfo()
