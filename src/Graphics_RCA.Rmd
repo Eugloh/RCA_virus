@@ -3,6 +3,7 @@ title: "plot RCA"
 author: "Eugénie LOHMANN"
 output: html_document
 runtime: shiny
+
 ---
 
 <style type="text/css">
@@ -41,7 +42,7 @@ packages=c("optparse","shiny","here","plotly","rlist","tidyverse","scales","resh
 check_packages(packages)
 
 
-baseDir <- "~/Documents/ROSARIO/fichiers/RCA_virus"
+baseDir <-  str_replace(getwd(),"[\\/][^\\/]*$","")
 SourceDir <- file.path(baseDir, "output")
 OutputDir <- file.path(baseDir, "plot")
 DataDir <- file.path(baseDir, "data")
