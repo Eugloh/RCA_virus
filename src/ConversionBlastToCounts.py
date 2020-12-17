@@ -27,8 +27,8 @@ print(datapath)
 files = os.listdir(datapath)
 
 
-# while 'newtables.py' in files:
-#     del files[files.index('newtables.py')]
+# while 'comptes.csv' in files:
+#     del files[files.index('comptes.csv')]
 
 
 env=["QueryID",	"SubjectID",	"evalue",	"bitscore",	"length query",	"perc id",	"frames",	"taxid",	"kingdom",	"scientifique name"	,"common name"	,"blast name"	,"title",	"seq query",	"startq",	"stopq","origin","size"]
@@ -44,10 +44,10 @@ with open(BLAST, newline='\n') as csvfile:
     next(csvfile)
     spamreader = csv.reader(csvfile, delimiter='\t', quotechar='"')
     for row in spamreader:
-        row.append(row[0].split("_")[1]) # RCA_Skin5_S17_L00184;clusterid=83;size=797 => Skin5
+        row.append("_".join(row[0].split("_")[:2])) # RCA_Skin5_S17_L00184;clusterid=83;size=797 => Skin5
         row.append(row[0].split("=")[2]) # 797
-        if row[0].split("_")[1] not in listPool:
-            listPool.append(row[0].split("_")[1])
+        if "_".join(row[0].split("_")[:2]) not in listPool:
+            listPool.append("_".join(row[0].split("_")[:2]))
         if row[10] not in listeverynamevirus:
             listeverynamevirus.append(row[10])
             Taxidcorrespond[row[10]]=row[7]
@@ -66,8 +66,6 @@ with open(BLAST, newline='\n') as csvfile:
                         Every[row[0]][env[el]]=float(row[el])
                     else:
                         Every[row[0]][env[el]]=row[el]
-
-
 
 
 # # Every contain keys as : RCA-Vulva-9_S958596;clusterid=58595;size=2
