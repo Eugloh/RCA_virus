@@ -37,7 +37,7 @@ check_packages <- function(x){
 }
 
 
-packages=c("optparse","shiny","here","plotly","rlist","tidyverse","scales","reshape2","ggplot2","stringr","dplyr","tidyr")
+packages=c("optparse","shiny","plotly","rlist","tidyverse","scales","reshape2","ggplot2","stringr","dplyr","tidyr")
 check_packages(packages)
 
 baseDir <-  str_replace(getwd(),"[\\/][^\\/]*$","")
